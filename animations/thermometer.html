@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: relative;
+        margin: 0px;
+      }
+      .arrowhead {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <canvas class='thermometer'></canvas>
+    </div>
+    <script>
+      const canvasWidth = 50;
+      const canvasHeight = 200;
+      const bulbDia = 40;
+      const shaftDia = 20;
+      const outlineThickness = 3;
+      const columnTopRange = [30, 125]
+      const animationTime = 5;
+
+      const canvasTherm = document.getElementsByClassName('thermometer')[0];
+      canvasTherm.width = canvasWidth;
+      canvasTherm.height = canvasHeight;
+      const ctxTherm = canvasTherm.getContext('2d');
+
+      let startTime = Date.now();
+      const drawTherm = () => {
+        const elapsedTimeSec = (Date.now() - startTime) / 1000;
+        const elapsedFrac = elapsedTimeSec / animationTime < 1 ?
+          elapsedTimeSec / animationTime : 1;
+
+        //   ctxTherm.clearRect(      // var gradient = ctxTherm.createLinearGradient(0, 0, arrowLength, 0);
+        // gradient.addColorStop("0", "red");
+        // gradient.addColorStop("1.0" ,"blue");
+        // Fill with gradient
+        // ctxTherm.strokeStyle = gradient;
+        ctxTherm.strokeStyle = 'black';
+        ctxTherm.lineWidth = outlineThickness;
+        ctxTherm.lineCap = 'round';
+        ctxTherm.fillStyle = 'white';
+
+        ctxTherm.beginPath();
+        ctxTherm.moveTo((canvasWidth - shaftDia) / 2, 0.8 * canvasHeight);
+        ctxTherm.lineTo((canvasWidth - shaftDia) / 2, canvasWidth / 2);
+        ctxTherm.arc(canvasWidth / 2, canvasWidth / 2, shaftDia / 2, Math.PI, 0);
+        ctxTherm.lineTo((canvasWidth + shaftDia) / 2, 0.8 * canvasHeight);
+        ctxTherm.fill();
+        ctxTherm.stroke();
+
+        ctxTherm.fillStyle = 'rgb(' + 255 * (1 - elapsedFrac) + ', 0, ' +
+          255 * elapsedFrac;
+        ctxTherm.beginPath();
+        ctxTherm.arc(
+          canvasWidth / 2, canvasHeight - canvasWidth / 2,
+          bulbDia / 2,
+          0, 2 * Math.PI
+        );
+        ctxTherm.fill();
+        ctxTherm.stroke();
+
+        ctxTherm.beginPath();
+        const colTop = columnTopRange[0] * (1 - elapsedFrac) +
+          columnTopRange[1] * elapsedFrac;
+        const colHeight = canvasHeight - canvasWidth / 2 - colTop;
+        ctxTherm.fillRect(
+          (canvasWidth - shaftDia + outlineThickness) / 2,
+          colTop,
+          shaftDia - outlineThickness,
+          colHeight
+        );
+        ctxTherm.fill();
+        if (elapsedFrac === 1) return;
+        
+        window.requestAnimationFrame(drawTherm);
+      }
+
+      window.requestAnimationFrame(drawTherm);
+    </script>
+  </body>
+</html>

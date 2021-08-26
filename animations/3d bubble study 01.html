@@ -1,0 +1,155 @@
+<html>
+<head>
+<script>
+  let tokenData = {"hash":"0xb7d76e4c11223344943aad34556677440044444444444444db3a0f8180147bbf","tokenId":"8000976"}
+</script>
+</head>
+<body>
+  <div id="container" class="output">
+    <div id="floor" class="floor">
+      <div id='element-datum' class='element-datum'>
+      <div id="cubic-element" class="transition-all">
+        <div class="face front">1</div>
+        <div class="face back">2</div>
+        <div class="face right">3</div>
+        <div class="face left">4</div>
+        <div class="face top">5</div>
+        <div class="face bottom">6</div>
+      </div>
+    </div>
+    </div>
+  </div>
+<script>
+  const style = document.createElement('style');
+  style.innerHTML = `
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.output {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  overflow: visible;
+  // overflow: hidden;
+  perspective: 900px;
+  border: 1px solid black;
+}
+#floor {
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle at 50% 50%, #BBBBDD80, #9999BB80 70.7%, transparent 70.7%);
+  transform-style: preserve-3d;
+  transform: rotateX(90deg) translateX(-200px) translateY(-400px) translateZ(-200px);
+}
+#element-datum {
+  transform-style: preserve-3d;
+  transform: translateZ(200px);
+}
+#cubic-element {
+  position: absolute;
+  left: 450px;
+  top: 450px;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+  animation: element-rot0 5s linear infinite;
+}
+.face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: inherit;
+  font-size: 60px;
+  color: #fff;
+}
+.front {
+  background: rgba(90,90,90,.7);
+  transform: translateZ(50px);
+}
+.back {
+  background: rgba(0,210,0,.7);
+  transform: rotateY(180deg) translateZ(50px);
+}
+.right {
+  background: rgba(210,0,0,.7);
+  transform: rotateY(90deg) translateZ(50px);
+}
+.left {
+  background: rgba(0,0,210,.7);
+  transform: rotateY(-90deg) translateZ(50px);
+}
+.top {
+  background: rgba(210,210,0,.7);
+  transform: rotateX(90deg) translateZ(50px);
+}
+.bottom {
+  background: rgba(210,0,210,.7);
+  transform: rotateX(-90deg) translateZ(50px);
+}
+@keyframes element-rot0 { 
+  50% { transform: rotate3d(1, 2, 1, 180deg) }
+  100% { transform: rotate3d(1, 2, 1, 360deg) }
+}`;
+
+  const w = 600;  // width of viewport
+  const h = 600;  // height of viewport
+  const b = 0;  // bottom of projection screen from floor height
+  const left_ul = 0; // arbitrary left position of upper left corner of floor on viewport
+  const top_ul = 0.8*h // arbitrary top position of far edge of floor on viewport
+  const left_bl = -300; // arbitrary left position of bottom left corner of floor on viewport
+  const top_bl = top_ul - Math.sqrt(3) * left_bl; // arbitrary, bottom left corner forms 60 degree angle on viewport
+  const left_ur = w; // mirror upper left corner position on viewport centerline
+  const left_br = w + 300; // mirror bottom left corner position on viewport centerline
+
+  const k = (w/2 - left_ul) / (left_ul - left_bl);
+  const s = (k + 1)*(w - 2*left_ul);
+  const e = k*top_bl - (k + 1)*top_ul + h;
+  const Ly = s * e / (k * (top_bl - h + e));
+  const d = Ly * k;
+  const Lx = Ly;
+
+  
+document.head.appendChild(style);
+
+const leftOffset = 200 + w / 2;
+const left = (x, y) => {
+  return leftOffset + s * (-Lx/2 + x) / (d + Ly - y);  // leftOffset + s*tan(theta)
+}
+const myTop = (y) => {
+  return h - e + (s * e / (d + Ly - y));  // b + h + e + s*tan(phi)
+}
+// const canvas = document.getElementById('canvas');
+// const canvasContext = canvas.getContext('2d');
+// canvasContext.strokeRect(200, 0, 600, 600);
+// canvasContext.beginPath();
+// let x = 0;
+// let y = 0;
+// canvasContext.moveTo(left(x, y), myTop(y));
+// x = Lx;
+// canvasContext.lineTo(left(x, y), myTop(y));
+// y = Ly;
+// canvasContext.lineTo(left(x, y), myTop(y));
+// x = 0;
+// canvasContext.lineTo(left(x, y), myTop(y));
+// y = 0;
+// canvasContext.lineTo(left(x, y), myTop(y));
+// canvasContext.stroke();
+
+// const varValues = document.getElementById('varValues');
+// varValues.innerHTML = `
+// w: ${Math.round(w)}
+// h: ${Math.round(h)}
+// s: ${Math.round(s)}
+// d: ${Math.round(d)}
+// e: ${Math.round(e)}
+// Lx: ${Math.round(Lx)}
+// Ly: ${Math.round(Ly)}
+// `;
+
+</script>
+</body>
+</html>

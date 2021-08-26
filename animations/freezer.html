@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: absolute;
+        margin: 0px;
+      }
+      #freezer {
+        width: 524px;
+        height: 270px;
+        background-image: url('images/icebox.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .thermometer {
+        transform: scale(50%);
+        right: 50px;
+      }
+      .heat-ripple {
+        transform: rotate(30deg) scale(50%) translate(50%, 50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='freezer'>
+        <canvas class='thermometer'></canvas>
+        <canvas class='heat-ripple'></canvas>
+      </div>
+    </div>
+    <script src='js/thermometer.js'></script>
+    <script src='js/heat-ripple.js'></script>
+  </body>
+</html>

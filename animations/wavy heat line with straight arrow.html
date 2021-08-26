@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: relative;
+        margin: 0px;
+      }
+      .arrowhead {
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <canvas class='wavy-arrow'></canvas><canvas class='arrowhead'></canvas>
+    </div>
+    <script>
+      const canvasWidth = 50;
+      const arrowLength = 200;
+      const rippleWidth = 20;
+      const lineThickness = 3;
+      const arrowHeadWidth = 15;
+      const arrowHeadLength = 15;
+      const upperTangent = (canvasWidth - rippleWidth) / 2;
+      const lowerTangent = upperTangent + rippleWidth;
+      const ripplePeriod = 20;
+      const rippleSpeed = 50;
+
+      const canvasRipples = document.getElementsByClassName('wavy-arrow')[0];
+      canvasRipples.width = arrowLength;
+      canvasRipples.height = canvasWidth;
+      const ctxRipples = canvasRipples.getContext('2d');
+
+      const canvasHead = document.getElementsByClassName('arrowhead')[0];
+      canvasHead.width = arrowHeadWidth + 15;
+      canvasHead.height = canvasWidth;
+      const ctxHead = canvasHead.getContext('2d');
+
+      var gradient = ctxRipples.createLinearGradient(0, 0, arrowLength, 0);
+      gradient.addColorStop("0", "red");
+      gradient.addColorStop("1.0" ,"blue");
+      // Fill with gradient
+      ctxRipples.strokeStyle = gradient;
+      ctxRipples.lineWidth = lineThickness;
+      ctxRipples.lineCap = 'round';
+
+      let startTime = Date.now();
+      let strokeXstart = -ripplePeriod;
+      const drawWiggly = () => {
+        ctxRipples.clearRect(0, 0, arrowLength, canvasWidth);
+        const elapsedTime = (Date.now() - startTime) / 1000;
+        strokeX = strokeXstart + rippleSpeed * elapsedTime;
+        if (strokeX > 0) {
+          strokeXstart = -ripplePeriod + strokeX;
+          startTime += elapsedTime * 1000;
+        }
+        ctxRipples.beginPath();
+        ctxRipples.moveTo(strokeX, upperTangent);
+        while (strokeX < arrowLength) {
+          ctxRipples.bezierCurveTo(
+            strokeX + ripplePeriod / 4, upperTangent,
+            strokeX + ripplePeriod / 4, lowerTangent,
+            strokeX + ripplePeriod / 2, lowerTangent
+          );
+          ctxRipples.bezierCurveTo(
+            strokeX + 3 * ripplePeriod / 4, lowerTangent,
+            strokeX + 3 * ripplePeriod / 4, upperTangent,
+            strokeX + ripplePeriod, upperTangent
+          );
+          strokeX += ripplePeriod;
+        }
+        // let freq = 1 / 
+        ctxRipples.stroke();
+        
+        const periodFrac = (strokeX - arrowLength) / ripplePeriod;
+        const angle = periodFrac * 2 * Math.PI;
+
+        ctxHead.clearRect(0, 0, arrowHeadWidth + 15, canvasWidth);
+        ctxHead.lineWidth = lineThickness;
+        ctxHead.strokeStyle = 'blue';
+        ctxHead.fillStyle = 'blue';
+        ctxHead.beginPath();
+        ctxHead.moveTo(
+          0,
+          canvasWidth / 2 - (rippleWidth / 2) * Math.cos(angle) - arrowHeadWidth / 2
+        )
+        ctxHead.lineTo(
+          arrowHeadWidth,
+          canvasWidth / 2 - (rippleWidth / 2) * Math.cos(angle)
+        )
+        ctxHead.lineTo(
+          0,
+          canvasWidth / 2 - (rippleWidth / 2) * Math.cos(angle) + arrowHeadWidth / 2
+        )
+        ctxHead.stroke();
+        ctxHead.fill();
+        window.requestAnimationFrame(drawWiggly);
+      }
+
+      window.requestAnimationFrame(drawWiggly);
+    </script>
+  </body>
+</html>

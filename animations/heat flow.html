@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: absolute;
+        margin: 0px;
+      }
+      #freezer {
+        width: 960px;
+        height: 540px;
+        /* background-image: url('images/icebox.jpg');
+        background-size: contain; */
+        background-repeat: no-repeat;
+      }
+      #t1 {
+        top: 50%;
+        transform: translate(150px, -50%);
+      }
+      #t2 {
+        top: 50%;
+        transform: translate(710px, -50%);
+      }
+      .heat-ripple {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: ripple-fade 5s ease-in forwards;
+      }
+      #heat-flow {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3em;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        animation: heat-flow 6s ease-in forwards;
+      }
+      #equilibrium {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3em;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        animation: equilibrium 6s ease-in forwards;
+      }
+      @keyframes ripple-fade {
+        to {
+          opacity: 0;
+        }
+      }
+      @keyframes heat-flow {
+        80% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes equilibrium {
+        80% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='freezer'>
+        <canvas class='thermometer' id='t1'></canvas>
+        <canvas class='heat-ripple'></canvas>
+        <div id='heat-flow'>HEAT FLOW →</div>
+        <div id='equilibrium'>← EQUILIBRIUM →</div>
+        <canvas class='thermometer' id='t2'></canvas>
+      </div>
+    </div>
+    <script src='js/thermometer.js'></script>
+    <script src='js/heat-ripple.js'></script>
+    <script>
+      // const heatRipple = (rippleWidth = 200, rippleHeight = 20,
+      //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
+      //   startColor = 'red', endColor = 'yellow') => {
+      heatRipple(400, 40, 6, 60, 100);
+      // const thermometer = (id = 't0',
+      //   change = 'cooling'|'heating'|'cold'|'hot',
+      //   animationTime = 5
+      //   canvasWidth = 50, canvasHeight = 200, 
+      //   bulbDia = 40, shaftDia = 20,
+      //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
+
+      thermometer('t1', 'cooling', 5, 100, 400, 80, 40, 4, [60, 250]);
+      thermometer('t2', 'cold', 5, 100, 400, 80, 40, 4, [60, 250]);
+    </script>
+  </body>
+</html>
