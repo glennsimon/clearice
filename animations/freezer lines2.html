@@ -1,0 +1,163 @@
+<html>
+<head>
+<script>
+  let tokenData = {"hash":"0xb7d76e4c11223344943aad34556677440044444444444444db3a0f8180147bbf","tokenId":"8000976"}
+</script>
+</head>
+<body>
+  <div id="container">
+      <div id="freezer">
+        <div class="front"></div>
+        <div class="front-rad"></div>
+        <div class="back"></div>
+        <div class="back-rad"></div>
+        <div class="right"></div>
+        <div class="right-rad"></div>
+        <div class="left"></div>
+        <div class="left-rad"></div>
+        <div class="top"></div>
+        <div class="top-rad"></div>
+        <div class="bottom"></div>
+        <div class="bottom-rad"></div>
+      </div>
+  </div>
+<script>
+  const style = document.createElement('style');
+  style.innerHTML = `
+* {
+  box-sizing: border-box;
+  position: absolute;
+}
+body {
+  margin: 50px;
+  padding: 0;
+}
+#container {
+  width: 960px;
+  height: 540px;
+  overflow: visible;
+  // overflow: hidden;
+  perspective: 900px;
+  border: 1px solid black;
+}
+#freezer {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 960px;
+  height: 540px;
+  transform: rotateX(-5deg) translateY(10px);
+  transform-style: preserve-3d;
+  <* transform: rotateX(-5deg) translateY(10px); *>
+  <* transform: rotateY(-90deg); *>
+  <* transform: rotateX(-90deg); *>
+}
+.front {
+  width: 960px;
+  height: 540px;
+  background: rgba(0,0,255,1);
+  clip-path: path(evenodd, 'M 0 0 h 960 v 540 h -960 v -540 M 60 90 \
+  v 360 A 40 40 0 0 0 100 490 h 760 A 40 40 0 0 0 900 450 v -360 \
+  A 40 40 0 0 0 860 50 h -760 A 40 40 0 0 0 60 90');
+}
+.front-rad {
+  width: 960px;
+  height: 540px;
+  background: rgba(0,0,0,1);
+  transform: translateZ(-20px);
+  clip-path: path(evenodd, 'M 0 0 h 960 v 540 h -960 v -540 M 80 90 \
+  v 360 A 20 20 0 0 0 100 470 h 760 A 20 20 0 0 0 880 450 v -360 \
+  A 20 20 0 0 0 860 70 h -760 A 20 20 0 0 0 80 90');
+}
+.back {
+  width: 960px;
+  height: 540px;
+  background: rgba(0,0,255,1);
+  transform: rotateY(180deg) translateZ(500px);
+  clip-path: path('M 100 90 h 760 v 360 h -760 v -360');
+}
+.back-rad {
+  width: 960px;
+  height: 540px;
+  background: rgba(0,0,255,1);
+  transform: rotateY(180deg) translateZ(480px);
+  clip-path: path(evenodd, 'M 0 0 h 960 v 540 h -960 v -540 M 80 90 \
+  v 360 A 20 20 0 0 0 100 470 h 760 A 20 20 0 0 0 880 450 v -360 \
+  A 20 20 0 0 0 860 70 h -760 A 20 20 0 0 0 80 90');
+}
+.right {
+  left: 230px;
+  width: 500px;
+  height: 540px;
+  background: rgba(255,0,0,1);
+  transform: rotateY(90deg) translate3D(250px, 0, 400px);
+  clip-path: path('M 20 90 h 460 v 360 h -460 v -360');
+}
+.right-rad {
+  left: 205px;
+  width: 550px;
+  height: 540px;
+  background: rgba(255,0,0,1);
+  transform: rotateY(90deg) translate3D(275px, 0, 380px);
+  clip-path: path('M 20 70 h 460 A 20 20 0 0 1 500 90 v 360 \
+  A 20 20 0 0 1 480 470 h -460 A 20 20 0 0 0 0 490 v 50 h 550 \
+  v -540 h -550 v 50 A 20 20 0 0 0 20 70');
+}
+.left {
+  left: 230px;
+  width: 500px;
+  height: 540px;
+  background: rgba(255,0,0,1);
+  transform: rotateY(90deg) translate3D(250px, 0, -400px);
+  clip-path: path('M 20 90 h 460 v 360 h -460 v -360');
+}
+.left-rad {
+  left: 205px;
+  width: 550px;
+  height: 540px;
+  background: rgba(255,0,0,1);
+  transform: rotateY(90deg) translate3D(275px, 0, -380px);
+  clip-path: path('M 20 70 h 460 A 20 20 0 0 1 500 90 v 360 \
+  A 20 20 0 0 1 480 470 h -460 A 20 20 0 0 0 0 490 v 50 h 550 \
+  v -540 h -550 v 50 A 20 20 0 0 0 20 70');
+}
+.top {
+  top: 20px;
+  width: 960px;
+  height: 500px;
+  background: rgba(0,255,0,1);
+  transform: rotateX(90deg) translate3D(0, -250px, 200px);
+  clip-path: path('M 100 20 h 760 v 460 h -760 v -460');
+}
+.top-rad {
+  width: 960px;
+  height: 550px;
+  background: rgba(0,255,0,1);
+  transform: rotateX(90deg) translate3D(0, -275px, 185px);
+  clip-path: path('M 0 0 h 960 v 550 h -60 A 20 20 0 0 1 880 530 \
+  v -460 A 20 20 0 0 0 860 50 h -760 A 20 20 0 0 0 80 70 v 460 \
+  A 20 20 0 0 1 60 550 h -60 v -550');
+}
+.bottom {
+  top: 20px;
+  width: 960px;
+  height: 500px;
+  background: rgba(0,255,0,1);
+  transform: rotateX(90deg) translate3D(0, -250px, -200px);
+  clip-path: path('M 100 20 h 760 v 460 h -760 v -460');
+}
+.bottom-rad {
+  width: 960px;
+  height: 550px;
+  background: rgba(0,255,0,1);
+  transform: rotateX(90deg) translate3D(0, -275px, -175px);
+  clip-path: path('M 0 0 h 960 v 550 h -60 A 20 20 0 0 1 880 530 \
+  v -460 A 20 20 0 0 0 860 50 h -760 A 20 20 0 0 0 80 70 v 460 \
+  A 20 20 0 0 1 60 550 h -60 v -550');
+}`;
+
+document.head.appendChild(style);
+
+</script>
+</body>
+</html>
