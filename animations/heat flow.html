@@ -2,9 +2,22 @@
   <head>
     <style>
       * {
+        font-family: Arial, Helvetica, sans-serif;
         box-sizing: border-box;
         position: absolute;
         margin: 0px;
+      }
+      #title-page {
+        text-align: center;
+        font-size: 6em;
+        color: lightblue;
+        animation: title 5s ease-out forwards;
+      }
+      #title-page>div {
+        top: 100px;
+        width: 960px;
+        height: 540px;
+        margin: auto;
       }
       #freezer {
         width: 960px;
@@ -16,25 +29,28 @@
       #t1 {
         top: 50%;
         transform: translate(150px, -50%);
+        animation: therm-fade 15s ease-in forwards;
       }
       #t2 {
         top: 50%;
         transform: translate(710px, -50%);
+        animation: therm-fade 15s ease-in forwards;
       }
       .heat-ripple {
+        animation: ripple-fade 15s ease-in forwards;
+      }
+      #r1 {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation: ripple-fade 5s ease-in forwards;
       }
       #heat-flow {
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 3em;
         top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
         opacity: 1;
-        animation: heat-flow 6s ease-in forwards;
+        animation: heat-flow 16s ease-in forwards;
       }
       #equilibrium {
         font-family: Arial, Helvetica, sans-serif;
@@ -43,23 +59,34 @@
         left: 50%;
         transform: translate(-50%, -50%);
         opacity: 0;
-        animation: equilibrium 6s ease-in forwards;
+        animation: equilibrium 16s ease-in forwards;
+      }
+      @keyframes title {
+        from { opacity: 1; }
+        80% { opacity: 1; }
+        to { opacity: 0; }
       }
       @keyframes ripple-fade {
-        to {
-          opacity: 0;
-        }
+        from { opacity: 0; }
+        33% { opacity: 0; }
+        37% { opacity: 1; }
+        to { opacity: 0; }
+      }
+      @keyframes therm-fade {
+        from { opacity: 0; }
+        31% { opacity: 0; }
+        37% { opacity: 1; }
+        to { opacity: 1; }
       }
       @keyframes heat-flow {
-        80% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 0;
-        }
+        from { opacity: 0; }
+        31% { opacity: 0; }
+        35% { opacity: 1; }
+        93% { opacity: 0; }
+        to { opacity: 0; }
       }
       @keyframes equilibrium {
-        80% {
+        93% {
           opacity: 0;
         }
         100% {
@@ -70,9 +97,12 @@
   </head>
   <body>
     <div id='container'>
+      <div id='title-page'>
+        <div>CLEAR ICE CONCEPTS</div>
+      </div>
       <div id='freezer'>
         <canvas class='thermometer' id='t1'></canvas>
-        <canvas class='heat-ripple'></canvas>
+        <canvas class='heat-ripple' id='r1'></canvas>
         <div id='heat-flow'>HEAT FLOW →</div>
         <div id='equilibrium'>← EQUILIBRIUM →</div>
         <canvas class='thermometer' id='t2'></canvas>
@@ -81,19 +111,23 @@
     <script src='js/thermometer.js'></script>
     <script src='js/heat-ripple.js'></script>
     <script>
-      // const heatRipple = (rippleWidth = 200, rippleHeight = 20,
-      //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
-      //   startColor = 'red', endColor = 'yellow') => {
-      heatRipple(400, 40, 6, 60, 100);
-      // const thermometer = (id = 't0',
-      //   change = 'cooling'|'heating'|'cold'|'hot',
-      //   animationTime = 5
-      //   canvasWidth = 50, canvasHeight = 200, 
-      //   bulbDia = 40, shaftDia = 20,
-      //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
+      const showHeatFlow = () => {
+        // const heatRipple = (rippleWidth = 200, rippleHeight = 20,
+        //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
+        //   startColor = 'red', endColor = 'yellow') => {
+          heatRipple('r1', 400, 40, 6, 60, 100);
+        // const thermometer = (id = 't0',
+        //   change = 'cooling'|'heating'|'cold'|'hot',
+        //   animationTime = 5
+        //   canvasWidth = 50, canvasHeight = 200, 
+        //   bulbDia = 40, shaftDia = 20,
+        //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
+  
+        thermometer('t1', 'cooling', 10, 100, 400, 80, 40, 4, [60, 250]);
+        thermometer('t2', 'cold', 5, 100, 400, 80, 40, 4, [60, 250]);
+      }
 
-      thermometer('t1', 'cooling', 5, 100, 400, 80, 40, 4, [60, 250]);
-      thermometer('t2', 'cold', 5, 100, 400, 80, 40, 4, [60, 250]);
+      setTimeout(showHeatFlow, 5000);
     </script>
   </body>
 </html>

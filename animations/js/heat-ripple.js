@@ -1,4 +1,5 @@
 const heatRipple = (
+  rippleId = 'r1',
   rippleWidth = 200,
   rippleHeight = 20,
   lineThickness = 3,
@@ -11,7 +12,7 @@ const heatRipple = (
   const upperTangent = (canvasHeight - rippleHeight) / 2;
   const lowerTangent = upperTangent + rippleHeight;
 
-  const canvasRipples = document.getElementsByClassName('heat-ripple')[0];
+  const canvasRipples = document.getElementById(rippleId);
   canvasRipples.width = rippleWidth;
   canvasRipples.height = canvasHeight;
   const ctxRipples = canvasRipples.getContext('2d');

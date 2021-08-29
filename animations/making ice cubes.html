@@ -1,0 +1,314 @@
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        position: absolute;
+        margin: 0px;
+      }
+      #container {
+        width: 960px;
+        height: 540px;
+        /* overflow: visible; */
+        overflow: hidden;
+        perspective: 900px;
+        /* border: 1px solid black; */
+      }
+      #freezer {
+        width: 960px;
+        height: 540px;
+        background-image: url('images/icebox.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        animation: zoom-in-freezer 3s ease-in forwards;
+      }
+      #extras {
+        width: 960px;
+        height: 540px;
+      }
+      #t1 {
+        top: 50%;
+        transform: translate(150px, -50%);
+      }
+      #t2 {
+        top: 50%;
+        transform: translate(680px, -80%);
+      }
+      .heat-ripple {
+        animation: ripple-fade 5s ease-in forwards;
+      }
+      #r1 {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      #heat-flow {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3em;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        animation: heat-flow 6s ease-in forwards;
+      }
+      #equilibrium {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3em;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        animation: equilibrium 6s ease-in forwards;
+      }
+      #cup {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 960px;
+        height: 540px;
+        transform: rotateX(-5deg) translateY(10px);
+        transform-style: preserve-3d;
+        animation: zoom-in 3s ease-in forwards;
+      }
+      .cup-bottom {
+        top: 220px;
+        left: 430px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255,255,255,.6);
+        transform: rotateX(90deg) translate3D(0, -200px, -200px);
+      }
+      .cup-bottom-upr {
+        top: 225px;
+        left: 435px;
+        width: 90px;
+        height: 90px;
+        background: rgba(255,255,255,.6);
+        transform: rotateX(90deg) translate3D(0, -200px, -190px);
+      }
+      .cup-lip {
+        top: 215px;
+        left: 425px;
+        width: 110px;
+        height: 110px;
+        background: rgba(255,255,255,.6);
+        transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
+        clip-path: path(evenodd, 'M 0 0 h 110 v 110 h -110 v -110 M 5.5 5.5 h 99 v 99 h -99 v -99');
+      }
+      .cup-front {
+        top: 370px;
+        left: 425px;
+        width: 110px;
+        height: 100px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 55px 100px;
+        transform: translateZ(-150px) rotateX(-2.866deg);
+        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+      }
+      .cup-front-inner {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 49.5px 90px;
+        transform: translateZ(-155px) rotateX(-2.866deg);
+        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+      }
+      .cup-back {
+        top: 370px;
+        left: 425px;
+        width: 110px;
+        height: 100px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 55px 100px;
+        transform: translateZ(-250px) rotateX(2.866deg);
+        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+      }
+      .cup-back-inner {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 49.5px 90px;
+        transform: translateZ(-245px) rotateX(2.866deg);
+        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+      }
+      .cup-left {
+        top: 370px;
+        left: 425px;
+        width: 110px;
+        height: 100px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 55px 100px;
+        transform: rotateY(90deg) translateX(200px) translateZ(-50px) rotateX(2.866deg);
+        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+      }
+      .cup-left-inner {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 49.5px 90px;
+        transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
+        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+      }
+      .cup-right {
+        top: 370px;
+        left: 425px;
+        width: 110px;
+        height: 100px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 55px 100px;
+        transform:rotateY(90deg)  translateX(200px) translateZ(50px) rotateX(-2.866deg);
+        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+      }
+      .cup-right-inner {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(255,255,255,.6);
+        transform-origin: 49.5px 90px;
+        transform:rotateY(90deg)  translateX(200px) translateZ(45px) rotateX(-2.866deg);
+        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+      }
+      .water-bottom {
+        top: 225px;
+        left: 435px;
+        width: 90px;
+        height: 90px;
+        background: rgba(0,0,255,.3);
+        transform: rotateX(90deg) translate3D(0, -200px, -190px);
+      }
+      .water-front {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(0,0,255,.3);
+        transform-origin: 49.5px 90px;
+        transform: translateZ(-155px) rotateX(-2.866deg);
+        clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+      }
+      .water-back {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(0,0,255,.3);
+        transform-origin: 49.5px 90px;
+        transform: translateZ(-245px) rotateX(2.866deg);
+        clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+      }
+      .water-left {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(0,0,255,.3);
+        transform-origin: 49.5px 90px;
+        transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
+        clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+      }
+      .water-right {
+        top: 370px;
+        left: 430.5px;
+        width: 99px;
+        height: 90px;
+        background: rgba(0,0,255,.3);
+        transform-origin: 49.5px 90px;
+        transform:rotateY(90deg)  translateX(200px) translateZ(45px) rotateX(-2.866deg);
+        clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+      }
+      .water-top {
+        top: 221px;
+        left: 431px;
+        width: 98px;
+        height: 98px;
+        background: rgba(0,0,255,.3);
+        transform: rotateX(90deg) translate3D(0, -200px, -110px);
+      }
+      @keyframes ripple-fade {
+        to {
+          opacity: 0;
+        }
+      }
+      @keyframes heat-flow {
+        80% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes equilibrium {
+        80% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes zoom-in {
+        to { transform: translate3D(0, -150px, 700px); }
+      }
+      @keyframes zoom-in-freezer { 
+        to { transform: scale(190%) translateY(-100px); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='freezer'>
+      </div>
+      <div id='extras'>
+        <canvas class='thermometer' id='t1'></canvas>
+        <canvas class='heat-ripple' id='r1'></canvas>
+        <!-- <div id='heat-flow'>HEAT FLOW →</div>
+        <div id='equilibrium'>← EQUILIBRIUM →</div> -->
+        <canvas class='thermometer' id='t2'></canvas>
+      </div>
+      <div id="cup">
+        <div class="cup-bottom"></div>
+        <div class="cup-bottom-upr"></div>
+        <div class="cup-lip"></div>
+        <div class="cup-front"></div>
+        <div class="cup-front-inner"></div>
+        <div class="cup-back"></div>
+        <div class="cup-back-inner"></div>
+        <div class="cup-left"></div>
+        <div class="cup-left-inner"></div>
+        <div class="cup-right"></div>
+        <div class="cup-right-inner"></div>
+        <div class="water-bottom"></div>
+        <div class="water-front"></div>
+        <div class="water-back"></div>
+        <div class="water-left"></div>
+        <div class="water-right"></div>
+        <div class="water-top"></div>
+      </div>
+    </div>
+    <script src='js/thermometer.js'></script>
+    <script src='js/heat-ripple.js'></script>
+    <script>
+      // const heatRipple = (  rippleId = 'r1',
+      //   rippleWidth = 200, rippleHeight = 20,
+      //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
+      //   startColor = 'red', endColor = 'yellow') => {
+      heatRipple('r1', 100, 10, 2, 20, 100);
+      // const thermometer = (id = 't0',
+      //   change = 'cooling'|'heating'|'cold'|'hot',
+      //   animationTime = 5
+      //   canvasWidth = 50, canvasHeight = 200, 
+      //   bulbDia = 40, shaftDia = 20,
+      //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
+
+      thermometer('t1', 'cooling', 5, 37, 150, 30, 15, 2, [22, 90]);
+      thermometer('t2', 'cold', 5, 37, 150, 30, 15, 2, [22, 90]);
+
+    </script>
+  </body>
+</html>
