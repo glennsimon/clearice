@@ -20,27 +20,65 @@
         background-image: url('images/icebox.png');
         background-size: contain;
         background-repeat: no-repeat;
-        animation: zoom-in-freezer 25s linear forwards;
+        animation: zoom-in-freezer 3s 22s forwards;
       }
       #extras {
         width: 960px;
         height: 540px;
       }
+      #leaders {
+        opacity: 0;
+        animation: disappear 19s 3s ease-in forwards;
+      }
       #t1 {
         top: 50%;
-        transform: translate(150px, -50%);
+        transform: translate(300px, 80%);
+        opacity: 0;
+        animation: disappear 19s 3s ease-in forwards;
       }
       #t2 {
         top: 50%;
-        transform: translate(680px, -80%);
+        transform: translate(680px, -150%);
+        animation: disappear 22s forwards;
       }
       .heat-ripple {
-        animation: ripple-fade 25s ease-in forwards;
+        opacity: 0;
+        animation: disappear 19s 3s ease-in forwards;
       }
       #r1 {
-        top: 50%;
+        top: 55%;
+        left: 47%;
+        transform: translate(-50%, -50%) rotate(-95deg);
+      }
+      #r2 {
+        top: 55%;
+        left: 53%;
+        transform: translate(-50%, -50%) rotate(-85deg);
+      }
+      #r3 {
+        top: 65%;
+        left: 60%;
+        transform: translate(-50%, -50%) rotate(-5deg);
+      }
+      #r4 {
+        top: 80%;
+        left: 59%;
+        transform: translate(-50%, -50%) rotate(30deg);
+      }
+      #r5 {
+        top: 87%;
         left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+      #r6 {
+        top: 80%;
+        left: 41%;
+        transform: translate(-50%, -50%) rotate(150deg);
+      }
+      #r7 {
+        top: 65%;
+        left: 40%;
+        transform: translate(-50%, -50%) rotate(185deg);
       }
       #heat-flow {
         font-family: Arial, Helvetica, sans-serif;
@@ -57,10 +95,10 @@
         top: 0px;
         width: 960px;
         height: 540px;
-        visibility: hidden;
+        /* visibility: hidden; */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 25s linear forwards;
+        animation: zoom-in 3s 22s forwards;
       }
       #cup-near {
         position: absolute;
@@ -68,10 +106,10 @@
         top: 0px;
         width: 960px;
         height: 540px;
-        visibility: hidden;
+        /* visibility: hidden; */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 25s linear forwards, dissapear 25s linear forwards;
+        animation: zoom-in 3s 22s forwards;
       }
       #cup-far-bottom {
         top: 220px;
@@ -81,6 +119,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
         clip-path: polygon(0 0, 100px 0, 100px 50px, 0 50px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-far-bottom-upr {
         top: 225px;
@@ -90,6 +130,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 0, 90px 0, 90px 45px, 0 45px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-near-bottom {
         top: 220px;
@@ -99,6 +141,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
         clip-path: polygon(0 50px, 100px 50px, 100px 100px, 0 100px, 0 50px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-near-bottom-upr {
         top: 225px;
@@ -108,6 +152,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-far-lip {
         top: 215px;
@@ -117,6 +163,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
         clip-path: polygon(0 0, 110px 0, 110px 55px, 104.5px 55px, 104.5px 5.5px, 5.5px 5.5px, 5.5px 55px, 0 55px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-near-lip {
         top: 215px;
@@ -126,6 +174,8 @@
         background: rgba(255,255,255,.6);
         transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
         clip-path: polygon(0 110px, 110px 110px, 110px 55px, 104.5px 55px, 104.5px 104.5px, 5.5px 104.5px, 5.5px 55px, 0 55px, 0 110px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-front {
         top: 370px;
@@ -136,6 +186,8 @@
         transform-origin: 55px 100px;
         transform: translateZ(-150px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-front-inner {
         top: 370px;
@@ -146,6 +198,8 @@
         transform-origin: 49.5px 90px;
         transform: translateZ(-155px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-back {
         top: 370px;
@@ -156,6 +210,8 @@
         transform-origin: 55px 100px;
         transform: translateZ(-250px) rotateX(2.866deg);
         clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-back-inner {
         top: 370px;
@@ -166,6 +222,8 @@
         transform-origin: 49.5px 90px;
         transform: translateZ(-245px) rotateX(2.866deg);
         clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-far-left {
         top: 370px;
@@ -176,6 +234,8 @@
         transform-origin: 55px 100px;
         transform: rotateY(90deg) translateX(200px) translateZ(-50px) rotateX(2.866deg);
         clip-path: polygon(55px 0, 110px 0, 105px 100px, 55px 100px, 55px 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-far-left-inner {
         top: 370px;
@@ -186,6 +246,8 @@
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(49.5px 0, 99px 0, 94.5px 90px, 49.5px 90px, 49.5px 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-near-left {
         top: 370px;
@@ -196,6 +258,8 @@
         transform-origin: 55px 100px;
         transform: rotateY(90deg) translateX(200px) translateZ(-50px) rotateX(2.866deg);
         clip-path: polygon(0 0, 55px 0, 55px 100px, 5px 100px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-near-left-inner {
         top: 370px;
@@ -206,6 +270,8 @@
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(0 0, 49.5px 0, 49.5px 90px, 4.5px 90px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-far-right {
         top: 370px;
@@ -216,6 +282,8 @@
         transform-origin: 55px 100px;
         transform:rotateY(90deg)  translateX(200px) translateZ(50px) rotateX(-2.866deg);
         clip-path: polygon(55px 0, 110px 0, 105px 100px, 55px 100px, 55px 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-far-right-inner {
         top: 370px;
@@ -226,6 +294,8 @@
         transform-origin: 49.5px 90px;
         transform:rotateY(90deg)  translateX(200px) translateZ(45px) rotateX(-2.866deg);
         clip-path: polygon(49.5px 0, 99px 0, 94.5px 90px, 49.5px 90px, 49.5px 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #cup-near-right {
         top: 370px;
@@ -236,6 +306,8 @@
         transform-origin: 55px 100px;
         transform:rotateY(90deg)  translateX(200px) translateZ(50px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 55px 0, 55px 100px, 5px 100px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #cup-near-right-inner {
         top: 370px;
@@ -246,6 +318,8 @@
         transform-origin: 49.5px 90px;
         transform:rotateY(90deg)  translateX(200px) translateZ(45px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 49.5px 0, 49.5px 90px, 4.5px 90px, 0 0);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-far-bottom {
         top: 225px;
@@ -255,6 +329,8 @@
         background: rgba(0,0,255,.3);
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 0, 90px 0, 90px 45px, 0 45px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #water-near-bottom {
         top: 225px;
@@ -264,6 +340,8 @@
         background: rgba(0,0,255,.3);
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-front {
         top: 370px;
@@ -274,6 +352,8 @@
         transform-origin: 49.5px 90px;
         transform: translateZ(-155px) rotateX(-2.866deg);
         clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-back {
         top: 370px;
@@ -284,6 +364,8 @@
         transform-origin: 49.5px 90px;
         transform: translateZ(-245px) rotateX(2.866deg);
         clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #water-far-left {
         top: 370px;
@@ -294,6 +376,8 @@
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(49.5px 10px, 98.5px 10px, 94.5px 90px, 49.5px 90px, 49.5px 10px);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #water-near-left {
         top: 370px;
@@ -304,6 +388,8 @@
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(0.5px 10px, 49.5px 10px, 49.5px 90px, 4.5px 90px, 0.5px 10px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-far-right {
         top: 370px;
@@ -314,6 +400,8 @@
         transform-origin: 49.5px 90px;
         transform:rotateY(90deg)  translateX(200px) translateZ(44.9px) rotateX(-2.866deg);
         clip-path: polygon(49.5px 10px, 98.5px 10px, 94.5px 90px, 49.5px 90px, 49.5px 10px);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #water-near-right {
         top: 370px;
@@ -324,6 +412,8 @@
         transform-origin: 49.5px 90px;
         transform:rotateY(90deg)  translateX(200px) translateZ(44.9px) rotateX(-2.866deg);
         clip-path: polygon(0.5px 10px, 49.5px 10px, 49.5px 90px, 4.5px 90px, 0.5px 10px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-far-top {
         top: 221px;
@@ -333,6 +423,8 @@
         background: rgba(0,0,255,.3);
         transform: rotateX(90deg) translate3D(0, -200px, -110px);
         clip-path: polygon(0 0, 98px 0, 98px 49px, 0 49px, 0 0);
+        opacity: 0;
+        animation: appear 3s 3s forwards;
       }
       #water-near-top {
         top: 221px;
@@ -342,6 +434,8 @@
         background: rgba(0,0,255,.3);
         transform: rotateX(90deg) translate3D(0, -200px, -110px);
         clip-path: polygon(0 49px, 98px 49px, 98px 98px, 0 98px, 0 49px);
+        opacity: 0;
+        animation: disappear 25s 3s forwards;
       }
       #water-csec {
         top: 370px;
@@ -365,32 +459,21 @@
           opacity: 0;
         }
       }
-      @keyframes equilibrium {
-        80% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
       @keyframes zoom-in {
-        12% { visibility: hidden; }
-        20% { visibility: visible; }
-        88% { transform: translate3D(0, 0, 0); }
         to { 
-          visibility: visible;
           transform: translate3D(0, -150px, 700px);
         }
       }
       @keyframes zoom-in-freezer {
-        88% { transform: translate3D(0, 0, 0); }
         to { transform: scale(190%) translateY(-100px); }
       }
-      @keyframes dissapear {
-        12% { visibility: hidden; }
-        20% { visibility: visible; }
-        88% { visibility: visible; }
-        to { visibility: hidden; }
+      @keyframes appear {
+        to { opacity: 1; }
+      }
+      @keyframes disappear {
+        12% { opacity: 1; }
+        88% { opacity: 1; }
+        to { opacity: 0; }
       }
     </style>
   </head>
@@ -399,9 +482,16 @@
       <div id='freezer'>
       </div>
       <div id='extras'>
+        <canvas id='leaders'></canvas>
         <canvas class='thermometer' id='t1'></canvas>
-        <canvas class='heat-ripple' id='r1'></canvas>
         <canvas class='thermometer' id='t2'></canvas>
+        <canvas class='heat-ripple' id='r1'></canvas>
+        <canvas class='heat-ripple' id='r2'></canvas>
+        <canvas class='heat-ripple' id='r3'></canvas>
+        <canvas class='heat-ripple' id='r4'></canvas>
+        <canvas class='heat-ripple' id='r5'></canvas>
+        <canvas class='heat-ripple' id='r6'></canvas>
+        <canvas class='heat-ripple' id='r7'></canvas>
       </div>
       <div id="cup-far">
         <div id="cup-far-bottom"></div>
@@ -444,7 +534,13 @@
       //   rippleWidth = 200, rippleHeight = 20,
       //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
       //   startColor = 'red', endColor = 'yellow') => {
-      heatRipple('r1', 100, 10, 2, 20, 100);
+      heatRipple('r1', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r2', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r3', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r4', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r5', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r6', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+      heatRipple('r7', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       // const thermometer = (id = 't0',
       //   change = 'cooling'|'heating'|'cold'|'hot',
       //   animationTime = 5
@@ -452,8 +548,18 @@
       //   bulbDia = 40, shaftDia = 20,
       //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
 
-      // thermometer('t1', 'cooling', 5, 37, 150, 30, 15, 2, [22, 90]);
-      // thermometer('t2', 'cold', 5, 37, 150, 30, 15, 2, [22, 90]);
+      thermometer('t1', 'cooling', 25, 20, 80, 16, 8, 1, [12, 50]);
+      thermometer('t2', 'cold', 5, 20, 80, 16, 8, 1, [12, 50]);
+      const leaders = document.getElementById('leaders');
+      leaders.width = 960;
+      leaders.height = 540;
+      const ctxLeaders = leaders.getContext('2d');
+      ctxLeaders.beginPath();
+      ctxLeaders.moveTo(310, 405);
+      ctxLeaders.lineTo(480, 395);
+      ctxLeaders.strokeStyle = 'black';
+      ctxLeaders.lineWidth = 1;
+      ctxLeaders.stroke();
 
       const waterCsec = document.getElementById('water-csec');
       waterCsec.width = 99;
@@ -486,7 +592,6 @@
         ctxWater.fill();
 
         gradient.addColorStop(0, 'rgba(170, 212, 229, 0)');
-        // gradient.addColorStop(fracRemaining, 'rgba(170, 212, 229, 0)');
         gradient.addColorStop(fracRemaining + 0.1 > 1 ? 1 : fracRemaining + 0.1,
           'rgba(170, 212, 229, 255)');
         gradient.addColorStop(1, 'rgba(170, 212, 229, 255)');
@@ -494,61 +599,6 @@
         ctxWater.fillStyle = gradient;
         ctxWater.fill();
     
-        // ctxWater.beginPath();
-        // ctxWater.moveTo((canvasWidth - shaftDia) / 2, 0.8 * canvasHeight);
-        // ctxWater.lineTo((canvasWidth - shaftDia) / 2, canvasWidth / 2);
-        // ctxWater.arc(canvasWidth / 2, canvasWidth / 2, shaftDia / 2, Math.PI, 0);
-        // ctxWater.lineTo((canvasWidth + shaftDia) / 2, 0.8 * canvasHeight);
-        // ctxWater.fill();
-        // ctxWater.stroke();
-    
-        // let colTop;
-        // switch (change) {
-        //   case 'cooling':
-        //     ctxWater.fillStyle =
-        //       'rgb(' + 255 * (1 - elapsedFrac) + ', 0, ' + 255 * elapsedFrac;
-        //     colTop =
-        //       columnTopRange[0] * (1 - elapsedFrac) +
-        //       columnTopRange[1] * elapsedFrac;
-        //     break;
-        //   case 'heating':
-        //     ctxWater.fillStyle =
-        //       'rgb(' + 255 * elapsedFrac + ', 0, ' + 255 * (1 - elapsedFrac);
-        //     colTop =
-        //       columnTopRange[0] * elapsedFrac +
-        //       columnTopRange[1] * (1 - elapsedFrac);
-        //     break;
-        //   case 'hot':
-        //     ctxWater.fillStyle = 'red';
-        //     colTop = columnTopRange[0];
-        //     break;
-        //   case 'cold':
-        //   default:
-        //     ctxWater.fillStyle = 'blue';
-        //     colTop = columnTopRange[1];
-        // }
-        // let colHeight = canvasHeight - canvasWidth / 2 - colTop;
-    
-        // ctxWater.beginPath();
-        // ctxWater.arc(
-        //   canvasWidth / 2,
-        //   canvasHeight - canvasWidth / 2,
-        //   bulbDia / 2,
-        //   0,
-        //   2 * Math.PI
-        // );
-        // ctxWater.fill();
-        // ctxWater.stroke();
-    
-        // ctxWater.beginPath();
-        // ctxWater.fillRect(
-        //   (canvasWidth - shaftDia + outlineThickness) / 2,
-        //   colTop,
-        //   shaftDia - outlineThickness,
-        //   colHeight
-        // );
-        // ctxWater.fill();
-
         if (fracRemaining > 0) {
           window.requestAnimationFrame(drawWater);
         }
