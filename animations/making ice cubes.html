@@ -21,6 +21,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         animation: zoom-in-freezer 3s 22s forwards;
+        z-index: -1;
       }
       #extras {
         width: 960px;
@@ -29,17 +30,20 @@
       #leaders {
         opacity: 0;
         animation: disappear 19s 3s ease-in forwards;
+        z-index: 0;
       }
       #t1 {
         top: 50%;
         transform: translate(300px, 80%);
         opacity: 0;
         animation: disappear 19s 3s ease-in forwards;
+        z-index: 10;
       }
       #t2 {
         top: 50%;
         transform: translate(680px, -150%);
         animation: disappear 22s forwards;
+        z-index: 10;
       }
       .heat-ripple {
         opacity: 0;
@@ -153,7 +157,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
         opacity: 0;
-        animation: appear 3s 3s forwards;
+        animation: disappear 25s 3s forwards;
       }
       #cup-far-lip {
         top: 215px;
@@ -541,15 +545,6 @@
       heatRipple('r5', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r6', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r7', 50, 5, 2, 10, 50, 'orange', 'lightblue');
-      // const thermometer = (id = 't0',
-      //   change = 'cooling'|'heating'|'cold'|'hot',
-      //   animationTime = 5
-      //   canvasWidth = 50, canvasHeight = 200, 
-      //   bulbDia = 40, shaftDia = 20,
-      //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
-
-      thermometer('t1', 'cooling', 25, 20, 80, 16, 8, 1, [12, 50]);
-      thermometer('t2', 'cold', 5, 20, 80, 16, 8, 1, [12, 50]);
       const leaders = document.getElementById('leaders');
       leaders.width = 960;
       leaders.height = 540;
@@ -560,6 +555,16 @@
       ctxLeaders.strokeStyle = 'black';
       ctxLeaders.lineWidth = 1;
       ctxLeaders.stroke();
+
+      // const thermometer = (id = 't0',
+      //   change = 'cooling'|'heating'|'cold'|'hot',
+      //   animationTime = 5
+      //   canvasWidth = 50, canvasHeight = 200, 
+      //   bulbDia = 40, shaftDia = 20,
+      //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
+
+      thermometer('t1', 'cooling', 25, 20, 80, 16, 8, 1, [12, 50]);
+      thermometer('t2', 'cold', 5, 20, 80, 16, 8, 1, [12, 50]);
 
       const waterCsec = document.getElementById('water-csec');
       waterCsec.width = 99;
