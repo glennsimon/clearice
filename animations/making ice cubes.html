@@ -577,11 +577,12 @@
 
       let startTime = Date.now() + 25000;
       const drawWater = () => {
-        ctxWater.clearRect(0, 0, 220, 180)
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
         const elapsedFrac = elapsedTimeSec / animationTime;
         if (elapsedFrac > 0.5) return;
     
+        ctxWater.clearRect(0, 0, 220, 180)
+        
         ctxWater.beginPath();
         ctxWater.moveTo(0, 0);
         ctxWater.lineTo(220, 0);
