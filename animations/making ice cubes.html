@@ -442,13 +442,10 @@
         animation: disappear 25s 3s forwards;
       }
       #water-csec {
-        top: 370px;
-        left: 430.5px;
-        width: 99px;
-        height: 90px;
-        transform-origin: 49.5px 90px;
-        transform: translateZ(-200px);
+        top: 180.5px;
+        left: 370px;
         opacity: 1;
+        z-index: 20;
       }
       @keyframes ripple-fade {
         to {
@@ -512,7 +509,6 @@
         <div id="water-far-left"></div>
         <div id="water-far-right"></div>
         <div id="water-far-top"></div>
-        <canvas id='water-csec'></canvas>
       </div>
       <div id="cup-near">
         <div id="cup-near-bottom"></div>
@@ -530,6 +526,7 @@
         <div id="water-near-right"></div>
         <div id="water-near-top"></div>
       </div>
+      <canvas id='water-csec'></canvas>
     </div>
     <script src='js/thermometer.js'></script>
     <script src='js/heat-ripple.js'></script>
@@ -545,6 +542,7 @@
       heatRipple('r5', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r6', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r7', 50, 5, 2, 10, 50, 'orange', 'lightblue');
+
       const leaders = document.getElementById('leaders');
       leaders.width = 960;
       leaders.height = 540;
@@ -562,15 +560,14 @@
       //   canvasWidth = 50, canvasHeight = 200, 
       //   bulbDia = 40, shaftDia = 20,
       //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
-
       thermometer('t1', 'cooling', 25, 20, 80, 16, 8, 1, [12, 50]);
       thermometer('t2', 'cold', 5, 20, 80, 16, 8, 1, [12, 50]);
 
       const waterCsec = document.getElementById('water-csec');
-      waterCsec.width = 99;
-      waterCsec.height = 90;
+      waterCsec.width = 220;
+      waterCsec.height = 180;
       const ctxWater = waterCsec.getContext('2d');
-    
+
       let particleSpeed = 5;
       const animationTime = 35;
       const particleLoc = [];
@@ -580,33 +577,42 @@
 
       let startTime = Date.now() + 25000;
       const drawWater = () => {
-        ctxWater.clearRect(0, 0, 99, 90)
+        ctxWater.clearRect(0, 0, 220, 180)
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
-        const fracRemaining =
-          elapsedTimeSec / animationTime < 1 ?
-          1 - elapsedTimeSec / animationTime : 0;
+        const elapsedFrac = elapsedTimeSec / animationTime;
+        if (elapsedFrac > 0.5) return;
     
         ctxWater.beginPath();
-        ctxWater.moveTo(0.5, 10);
-        ctxWater.lineTo(98.5, 10);
-        ctxWater.lineTo(94.5, 90);
-        ctxWater.lineTo(4.5, 90);
-        ctxWater.lineTo(0.5, 10);
+        ctxWater.moveTo(0, 0);
+        ctxWater.lineTo(220, 0);
+        ctxWater.lineTo(211, 180);
+        ctxWater.lineTo(9, 180);
+        ctxWater.lineTo(0, 0);
 
-        ctxWater.fillStyle = 'rgba(0,0,255,.3)';
+        ctxWater.fillStyle = 'rgba(170, 212, 229, 0.7)';
+        ctxWater.fill();
+        
+        const maxRad = 50;
+        ctxWater.beginPath();
+        ctxWater.moveTo(110, 90 * elapsedFrac);
+        ctxWater.arcTo(220 - 110 * elapsedFrac, 90 * elapsedFrac, 215.5 - 105.5 * elapsedFrac, 90, maxRad * elapsedFrac);
+        ctxWater.arcTo(211 - 101 * elapsedFrac, 180 - 90 * elapsedFrac, 110, 180 - 90 * elapsedFrac, maxRad * elapsedFrac);
+        ctxWater.arcTo(9 + 101 * elapsedFrac, 180 - 90 * elapsedFrac, 4.5 + 105.5 * elapsedFrac, 90, maxRad * elapsedFrac);
+        ctxWater.arcTo(110 * elapsedFrac, 90 * elapsedFrac, 110, 90 * elapsedFrac, maxRad * elapsedFrac);
+
+        ctxWater.fillStyle = 'rgba(0,0,255,.3)'
         ctxWater.fill();
 
-        gradient.addColorStop(0, 'rgba(170, 212, 229, 0)');
-        gradient.addColorStop(fracRemaining + 0.1 > 1 ? 1 : fracRemaining + 0.1,
-          'rgba(170, 212, 229, 255)');
-        gradient.addColorStop(1, 'rgba(170, 212, 229, 255)');
+
+        // gradient.addColorStop(0, 'rgba(170, 212, 229, 0)');
+        // gradient.addColorStop(fracRemaining + 0.1 > 1 ? 1 : fracRemaining + 0.1,
+        //   'rgba(170, 212, 229, 255)');
+        // gradient.addColorStop(1, 'rgba(170, 212, 229, 255)');
       
-        ctxWater.fillStyle = gradient;
-        ctxWater.fill();
+        // ctxWater.fillStyle = gradient;
+        // ctxWater.fill();
     
-        if (fracRemaining > 0) {
-          window.requestAnimationFrame(drawWater);
-        }
+        window.requestAnimationFrame(drawWater);
       }
 
       setTimeout(drawWater, 25000);
