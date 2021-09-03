@@ -570,53 +570,133 @@
 
       let particleSpeed = 5;
       const animationTime = 35;
-      const particleLoc = [];
-      const numParticles = 10;
+      const particleData = [];
+      const numParticles = 20;
       const particleDia = 5;
       const gradient = ctxWater.createRadialGradient(49.5, 50, 20, 49.5, 50, 65);
+      const minSpeed = 20;
+      const maxSpeed = 20;
+      const maxSize = 5;
 
-      let startTime = Date.now() + 25000;
+      for (let particleNum = 0; particleNum < numParticles; particleNum++) {
+        const particle = {};
+        // angle must not include near horizontals and near verticals
+        const angle = (Math.floor(Math.random() * 4)) * (Math.PI / 4) +
+            Math.PI / 16 + Math.random() * (Math.PI * 1 / 8);
+        const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
+        particle.vX = speed * Math.cos(angle);
+        particle.vY = speed * Math.sin(angle);
+        particle.size = 2 + Math.random() * maxSize;
+        particle.color = 'rgba(' + Math.floor(128 + Math.random() * 127) + ',' +
+          Math.floor(128 + Math.random() * 127) + ',' +
+          Math.floor(128 + Math.random() * 127) + ',' +
+          '1)';
+          // '0.3)';
+          particle.xLoc = maxSize + Math.random() * (waterCsec.width - 2 * maxSize);
+        particle.yLoc = maxSize + Math.random() * (waterCsec.height - 2 * maxSize);        
+        particleData[particleNum] = particle;
+      }
+
+      // let startTime = Date.now() + 25000;
+      let startTime = Date.now();
+      let newTime;
+      let lastTime = startTime;
+      let diffTime;
       const drawWater = () => {
+        newTime = Date.now();
+        diffTime = (newTime - lastTime) / 1000;
+        lastTime = newTime;
+
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
         const elapsedFrac = elapsedTimeSec / animationTime;
-        if (elapsedFrac > 0.5) return;
+        if (elapsedFrac > 0.4) return;
+
+        const topLeftX = 0;
+        const topRightX = 220;
+        const bottomLeftX = 9;
+        const bottomRightX = 211;
     
-        ctxWater.clearRect(0, 0, 220, 180)
+        ctxWater.clearRect(0, 0, waterCsec.width, waterCsec.height);
         
         ctxWater.beginPath();
-        ctxWater.moveTo(0, 0);
-        ctxWater.lineTo(220, 0);
-        ctxWater.lineTo(211, 180);
-        ctxWater.lineTo(9, 180);
+        ctxWater.moveTo(topLeftX, 0);
+        ctxWater.lineTo(topRightX, 0);
+        ctxWater.lineTo(bottomRightX, waterCsec.height);
+        ctxWater.lineTo(bottomLeftX, waterCsec.height);
         ctxWater.lineTo(0, 0);
 
         ctxWater.fillStyle = 'rgba(170, 212, 229, 0.7)';
         ctxWater.fill();
+
+        const maxRad = 90;
+        const yOffset = elapsedFrac * waterCsec.height / 2;
+        const xOffset = elapsedFrac * (topRightX + bottomRightX) / 4;
+        const radius = elapsedFrac * maxRad;
+        const invSideSlope = bottomLeftX / waterCsec.height;
         
-        const maxRad = 50;
         ctxWater.beginPath();
-        ctxWater.moveTo(110, 90 * elapsedFrac);
-        ctxWater.arcTo(220 - 110 * elapsedFrac, 90 * elapsedFrac, 215.5 - 105.5 * elapsedFrac, 90, maxRad * elapsedFrac);
-        ctxWater.arcTo(211 - 101 * elapsedFrac, 180 - 90 * elapsedFrac, 110, 180 - 90 * elapsedFrac, maxRad * elapsedFrac);
-        ctxWater.arcTo(9 + 101 * elapsedFrac, 180 - 90 * elapsedFrac, 4.5 + 105.5 * elapsedFrac, 90, maxRad * elapsedFrac);
-        ctxWater.arcTo(110 * elapsedFrac, 90 * elapsedFrac, 110, 90 * elapsedFrac, maxRad * elapsedFrac);
+        ctxWater.moveTo(topRightX / 2, yOffset);
+        ctxWater.arcTo(topRightX - (xOffset + yOffset * invSideSlope), yOffset, 215.5 - xOffset, 90, radius);
+        ctxWater.arcTo(220 - (xOffset + (180 - yOffset) * invSideSlope), 180 - yOffset, 110, 180 - yOffset, radius);
+        ctxWater.arcTo(xOffset + (180 - yOffset) * invSideSlope, 180 - yOffset, 4.5 + xOffset, 90, radius);
+        ctxWater.arcTo(xOffset + yOffset * invSideSlope, yOffset, 110, yOffset, radius);
 
         ctxWater.fillStyle = 'rgba(0,0,255,.3)'
         ctxWater.fill();
 
+        for (let particleNum = 0; particleNum < numParticles; particleNum++) {
+          ctxWater.beginPath();
+          ctxWater.moveTo(particleData[particleNum].xLoc, particleData[particleNum].yLoc);
+          ctxWater.arc(particleData[particleNum].xLoc, particleData[particleNum].yLoc,
+            particleData[particleNum].size, 0, 2 * Math.PI);
+          ctxWater.fillStyle = particleData[particleNum].color;
+          ctxWater.fill();
 
-        // gradient.addColorStop(0, 'rgba(170, 212, 229, 0)');
-        // gradient.addColorStop(fracRemaining + 0.1 > 1 ? 1 : fracRemaining + 0.1,
-        //   'rgba(170, 212, 229, 255)');
-        // gradient.addColorStop(1, 'rgba(170, 212, 229, 255)');
-      
-        // ctxWater.fillStyle = gradient;
-        // ctxWater.fill();
-    
+          particleData[particleNum].xLoc += particleData[particleNum].vX * diffTime;
+          particleData[particleNum].yLoc += particleData[particleNum].vY * diffTime;
+
+          if (particleData[particleNum].xLoc < radius + xOffset &&
+              particleData[particleNum].yLoc < radius + yOffset) {
+            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;                          
+          }
+          else if (particleData[particleNum].xLoc < radius + xOffset + bottomLeftX &&
+              particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
+            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          }
+          else if (particleData[particleNum].xLoc > waterCsec.width - (radius + xOffset) &&
+              particleData[particleNum].yLoc < radius + yOffset) {
+            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          } 
+          else if (particleData[particleNum].xLoc > waterCsec.width - (radius + xOffset + bottomLeftX) &&
+              particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
+            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          }
+          else if (particleData[particleNum].xLoc < xOffset + 
+              (particleData[particleNum].yLoc - yOffset) * invSideSlope + particleData[particleNum].size) {
+            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+          }
+          else if (particleData[particleNum].yLoc < radius + yOffset) {
+            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          }
+          else if (particleData[particleNum].xLoc > waterCsec.width - (xOffset +
+              (particleData[particleNum].yLoc - yOffset) * invSideSlope + particleData[particleNum].size)) {
+            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+          }
+          else if (particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
+            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          }
+
+        }
+
         window.requestAnimationFrame(drawWater);
       }
 
-      setTimeout(drawWater, 25000);
+      // setTimeout(drawWater, 25000);
+      drawWater();
     </script>
   </body>
 </html>
