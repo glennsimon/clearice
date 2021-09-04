@@ -571,31 +571,36 @@
       let particleSpeed = 5;
       const animationTime = 35;
       const particleData = [];
-      const numParticles = 20;
+      const numParticles = 40;
       const particleDia = 5;
       const gradient = ctxWater.createRadialGradient(49.5, 50, 20, 49.5, 50, 65);
       const minSpeed = 20;
       const maxSpeed = 20;
-      const maxSize = 5;
+      const maxSize = 2;
 
       for (let particleNum = 0; particleNum < numParticles; particleNum++) {
         const particle = {};
         // angle must not include near horizontals and near verticals
-        const angle = (Math.floor(Math.random() * 4)) * (Math.PI / 4) +
-            Math.PI / 16 + Math.random() * (Math.PI * 1 / 8);
+        const angle = (Math.floor(Math.random() * 4)) * (Math.PI / 2) +
+            Math.PI / 8 + Math.random() * (Math.PI * 1 / 4);
         const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
         particle.vX = speed * Math.cos(angle);
         particle.vY = speed * Math.sin(angle);
-        particle.size = 2 + Math.random() * maxSize;
-        particle.color = 'rgba(' + Math.floor(128 + Math.random() * 127) + ',' +
-          Math.floor(128 + Math.random() * 127) + ',' +
-          Math.floor(128 + Math.random() * 127) + ',' +
+        particle.size = 1 + Math.random() * maxSize;
+        particle.color = 'rgba(' + Math.floor(200 + Math.random() * 55) + ',' +
+          Math.floor(200 + Math.random() * 55) + ',' +
+          Math.floor(200 + Math.random() * 55) + ',' +
           '1)';
           // '0.3)';
           particle.xLoc = maxSize + Math.random() * (waterCsec.width - 2 * maxSize);
         particle.yLoc = maxSize + Math.random() * (waterCsec.height - 2 * maxSize);        
         particleData[particleNum] = particle;
       }
+
+      const topLeftX = 0;
+      const topRightX = 220;
+      const bottomLeftX = 9;
+      const bottomRightX = 211;
 
       // let startTime = Date.now() + 25000;
       let startTime = Date.now();
@@ -609,13 +614,9 @@
 
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
         const elapsedFrac = elapsedTimeSec / animationTime;
+
         if (elapsedFrac > 0.4) return;
 
-        const topLeftX = 0;
-        const topRightX = 220;
-        const bottomLeftX = 9;
-        const bottomRightX = 211;
-    
         ctxWater.clearRect(0, 0, waterCsec.width, waterCsec.height);
         
         ctxWater.beginPath();
@@ -646,7 +647,6 @@
 
         for (let particleNum = 0; particleNum < numParticles; particleNum++) {
           ctxWater.beginPath();
-          ctxWater.moveTo(particleData[particleNum].xLoc, particleData[particleNum].yLoc);
           ctxWater.arc(particleData[particleNum].xLoc, particleData[particleNum].yLoc,
             particleData[particleNum].size, 0, 2 * Math.PI);
           ctxWater.fillStyle = particleData[particleNum].color;
@@ -654,41 +654,134 @@
 
           particleData[particleNum].xLoc += particleData[particleNum].vX * diffTime;
           particleData[particleNum].yLoc += particleData[particleNum].vY * diffTime;
+          particleData[particleNum].vX *= 0.999;
+          particleData[particleNum].vY *= 0.999;
 
-          if (particleData[particleNum].xLoc < radius + xOffset &&
-              particleData[particleNum].yLoc < radius + yOffset) {
-            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;                          
+          const x1 = (yOffset + particleData[particleNum].size) * 9 / 180 + xOffset + particleData[particleNum].size;
+          const y1 = yOffset + particleData[particleNum].size;
+          const x2 = x1 + (radius - particleData[particleNum].size) / Math.tan(Math.atan(180 / 9) / 2);
+          const y2 = y1;
+          const x4 = x2;
+          const y4 = yOffset + radius;
+          const x3 = x4 - (radius - particleData[particleNum].size) * Math.cos(Math.atan(9 / 180));
+          const y3 = y4 + (radius - particleData[particleNum].size) * Math.sin(Math.atan(9 / 180));
+
+          const y5 = 180 - y1;
+          const x5 = x1 + (y5 - y1) * 9 / 180;
+          const y8 = 180 - y4;
+          const x8 = x4 + (y8 - y4) * 9 / 180;
+          const y6 = y5;
+          const x6 = x8;
+          const x7 = x8 - (radius - particleData[particleNum].size) * Math.cos(Math.atan(9/180));
+          const y7 = y8 + (radius - particleData[particleNum].size) * Math.sin(Math.atan(9/180));
+
+          const x4prime = 220 - x4;
+          const x8prime = 220 - x8;
+
+          const cornerOffset = (radius - particleData[particleNum].size) * Math.sin(Math.PI / 4);
+          const xB = x2;
+          const yB = y2;
+          const xC = x3;
+          const yC = y3;
+          const xD = x7;
+          const yD = y7;
+          const xF = x6;
+          const yF = y6;
+
+          // ctxWater.fillStyle = 'black';
+          // // draw point B
+          // ctxWater.beginPath();
+          // ctxWater.arc(xB, yB, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+          // // draw point C
+          // ctxWater.beginPath();
+          // ctxWater.arc(xC, yC, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+          // // draw point D
+          // ctxWater.beginPath();
+          // ctxWater.arc(xD, yD, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+          // // draw point F
+          // ctxWater.beginPath();
+          // ctxWater.arc(xF, yF, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+          // // draw point 4
+          // ctxWater.beginPath();
+          // ctxWater.arc(x4, y4, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+          // // draw point 8
+          // ctxWater.beginPath();
+          // ctxWater.arc(x8, y8, 1, 0, 2 * Math.PI);
+          // ctxWater.fill();
+
+          // top boundary
+          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= x4 - radius && particleData[particleNum].xLoc < xB) {
+            if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((xB - particleData[particleNum].xLoc) / (radius - particleData[particleNum].size)))) {
+              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
           }
-          else if (particleData[particleNum].xLoc < radius + xOffset + bottomLeftX &&
-              particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
-            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= xB && particleData[particleNum].xLoc < 220 - xB) {
+            if (particleData[particleNum].yLoc < yB) {
+              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
           }
-          else if (particleData[particleNum].xLoc > waterCsec.width - (radius + xOffset) &&
-              particleData[particleNum].yLoc < radius + yOffset) {
-            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-          } 
-          else if (particleData[particleNum].xLoc > waterCsec.width - (radius + xOffset + bottomLeftX) &&
-              particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
-            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= 220 - xB && particleData[particleNum].xLoc < 220 - (x4 - radius)) {
+            if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((particleData[particleNum].xLoc - (220 - xB)) / (radius - particleData[particleNum].size)))) {
+              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
           }
-          else if (particleData[particleNum].xLoc < xOffset + 
-              (particleData[particleNum].yLoc - yOffset) * invSideSlope + particleData[particleNum].size) {
-            if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+          
+          // left boundary
+          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yB && particleData[particleNum].yLoc < yC) {
+            if (particleData[particleNum].xLoc < x4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y4 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size)))) {
+              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
           }
-          else if (particleData[particleNum].yLoc < radius + yOffset) {
-            if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yC && particleData[particleNum].yLoc < yD) {
+            if (particleData[particleNum].xLoc < xC + (particleData[particleNum].yLoc - yC) * 9 / 180) {
+              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
           }
-          else if (particleData[particleNum].xLoc > waterCsec.width - (xOffset +
-              (particleData[particleNum].yLoc - yOffset) * invSideSlope + particleData[particleNum].size)) {
-            if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yD && particleData[particleNum].yLoc < yF) {
+            if (particleData[particleNum].xLoc < x8 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y8 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size)))) {
+              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
           }
-          else if (particleData[particleNum].yLoc > waterCsec.height - yOffset - radius) {
-            if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+
+          // bottom boundary
+          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= xD && particleData[particleNum].xLoc < xF) {
+            if (particleData[particleNum].yLoc > y8 + (radius - particleData[particleNum].size) * Math.cos(Math.asin(particleData[particleNum].xLoc - x8) / (radius - particleData[particleNum].size))) {
+              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
           }
+          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= xD && particleData[particleNum].xLoc < 220 - xD) {
+            if (particleData[particleNum].yLoc > yF) {
+              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
+          }
+          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].xLoc < 220 - xD) {
+            if (particleData[particleNum].yLoc > y8 + (radius - particleData[particleNum].size) * Math.cos(Math.asin(particleData[particleNum].xLoc - (220 - x8)) / (radius - particleData[particleNum].size))) {
+              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
+          }
+
+          // right boundary
+          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yB && particleData[particleNum].yLoc < yC) {
+            if (particleData[particleNum].xLoc > 220 - (x4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y4 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size))))) {
+              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
+          }
+          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yC && particleData[particleNum].yLoc < yD) {
+            if (particleData[particleNum].xLoc > 220 - (xC + (particleData[particleNum].yLoc - yC) * 9 / 180)) {
+              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
+          }
+          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yD && particleData[particleNum].yLoc < yF) {
+            if (particleData[particleNum].xLoc > 220 - (x8 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y8 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size))))) {
+              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
+          }
+
 
         }
 
