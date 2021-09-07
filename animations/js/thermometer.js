@@ -19,7 +19,6 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   const yBulbCenter = thermometerHeight - thermometerWidth / 2;
 
   const graph = {};
-  // let deltaCol = 0;
   graph.totalTime = 0;
   graph.totalTemp = 0;
   graph.totalRampTime = 0;
@@ -47,12 +46,12 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
     tempStartingFrac += graph.data[i].tempFrac;
   }
 
-  // draw thermometer
   ctxTherm.strokeStyle = 'black';
   ctxTherm.lineWidth = outlineThickness;
   ctxTherm.lineCap = 'round';
   ctxTherm.fillStyle = 'white';
 
+  // draw thermometer shaft
   ctxTherm.beginPath();
   ctxTherm.moveTo((thermometerWidth - shaftDia) / 2, 0.8 * thermometerHeight);
   ctxTherm.lineTo((thermometerWidth - shaftDia) / 2, thermometerWidth / 2);
@@ -61,6 +60,7 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   ctxTherm.fill();
   ctxTherm.stroke();
 
+  // draw thermometer bulb
   ctxTherm.beginPath();
   ctxTherm.arc(
     thermometerWidth / 2,
@@ -71,15 +71,16 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   );
   ctxTherm.stroke();
 
+  // draw labels if labels == true
   if (labels) {
     ctxTherm.font = '' + 0.4 * thermometerWidth + 'px sans-serif';
     ctxTherm.textBaseline = 'middle';
     ctxTherm.fillStyle = 'black';
-    const dYdT = timingArray[0].tempStart - timingArray[timingArray.length - 1].tempFinish != 0 ?
+    const dYdT = graph.totalTemp != 0 ?
       (lowerColumnPosition - upperColumnPosition) /
       (timingArray[0].tempStart - timingArray[timingArray.length - 1].tempFinish) : 0;
     const tickXStart = (thermometerWidth + shaftDia) / 2;
-    let yPos = start === 'cold' ? lowerColumnPosition : upperColumnPosition;
+    let yPos = dYdT < 0 ? lowerColumnPosition : upperColumnPosition;
     for (let i = 0; i < timingArray.length; i++) {
       ctxTherm.beginPath();
       ctxTherm.moveTo(tickXStart, yPos);
@@ -99,54 +100,35 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   let segmentIndex = 0;
   const drawTherm = () => {
     const elapsedTimeSec = (Date.now() - startTime) / 1000;
-    // const elapsedFrac = elapsedTimeSec / animationTime < 1 ? elapsedTimeSec / animationTime : 1;
 
     let colTop;
     let fillStyle;
     let rampElapsedFrac;
     let tempElapsedFrac;
-    switch (start) {
-      case 'hot':
-        if (elapsedTimeSec < graph.data[segmentIndex].dwellEnd) {
-          rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac;
-          tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac;
-          // fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
-          // colTop = 
-          //     upperColumnPosition * (1 - rampElapsedFrac) +
-          //     lowerColumnPosition * rampElapsedFrac;
-        } else if (elapsedTimeSec < graph.data[segmentIndex].rampEnd) {
-          rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
-              graph.data[segmentIndex].rampFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
-              (timingArray[segmentIndex].animationTime);
-          tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
-              graph.data[segmentIndex].tempFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
-              (timingArray[segmentIndex].animationTime);
-          // fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
-          // colTop = 
-          //     upperColumnPosition * (1 - rampElapsedFrac) +
-          //     lowerColumnPosition * rampElapsedFrac;
-        } else {
-          rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
-              graph.data[segmentIndex].rampFrac;
-          tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
-              graph.data[segmentIndex].tempFrac;
-          // fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
-          // colTop = 
-          //     upperColumnPosition * (1 - rampElapsedFrac) +
-          //     lowerColumnPosition * rampElapsedFrac;
-          segmentIndex += 1;
-          if (segmentIndex === timingArray.length) return;
-        }
-        fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
-        colTop = 
-            upperColumnPosition * (1 - tempElapsedFrac) +
-            lowerColumnPosition * tempElapsedFrac;
-        break;
-      case 'cold':
-      default:
-        ctxTherm.fillStyle = 'blue';
-        colTop = lowerColumnPosition;
+    if (elapsedTimeSec < graph.data[segmentIndex].dwellEnd) {
+      rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac;
+      tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac;
     }
+    else if (elapsedTimeSec < graph.data[segmentIndex].rampEnd) {
+      rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
+          graph.data[segmentIndex].rampFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
+          (timingArray[segmentIndex].animationTime);
+      tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
+          graph.data[segmentIndex].tempFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
+          (timingArray[segmentIndex].animationTime);
+    }
+    else {
+      rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
+          graph.data[segmentIndex].rampFrac;
+      tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
+          graph.data[segmentIndex].tempFrac;
+      segmentIndex += 1;
+      if (segmentIndex === timingArray.length) return;
+    }
+    fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
+    colTop = 
+        upperColumnPosition * (1 - tempElapsedFrac) +
+        lowerColumnPosition * tempElapsedFrac;
     let colHeight = yBulbCenter - colTop;
 
     // clear previous column
