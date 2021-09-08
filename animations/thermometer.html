@@ -17,18 +17,20 @@
     </div>
     <script src='js/thermometer.js'></script>
     <script>
-      // const thermometer = (id = 't0', start = 'cold', animationTime = 5,
+      // const thermometer = (id = 't0', start = 'cold', tempRampTime = 5,
       //     thermometerWidth = 50, thermometerHeight = 200, labels = false, timingArray) => {
       // start = 'cold'|'hot'
-      // timingArray = [{startDwell: <num sec>,
+      // timingArray = [{initialDwell: <num sec>,
       //                 tempStart: <num degF>,
       //                 tempFinish: <num degF>,
-      //                 animationTime = <num sec>}, {...}, ...]
-        thermometer('t1', 'hot', 10, 100, 400, true,
-          // [{startDwell: 0, tempStart: 0, tempFinish: 32, animationTime: 10},
-          // {startDwell: 5, tempStart: 32, tempFinish: 60, animationTime: 5}]);
-          [{startDwell: 0, tempStart: 60, tempFinish: 32, animationTime: 10},
-          {startDwell: 5, tempStart: 32, tempFinish: 0, animationTime: 5}]);
+      //                 tempRampTime = <num sec>}, {...}, ...]
+        thermometer('t1', 'cold', 10, 100, 400, true,
+          [{initialDwell: 0, tempStart: 0, tempFinish: 32, tempRampTime: 10},
+          {initialDwell: 5, tempStart: 32, tempFinish: 60, tempRampTime: 5}]);
+          // [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 10},
+          // {initialDwell: 5, tempStart: 32, tempFinish: 0, tempRampTime: 5}]);
+          // [{initialDwell: 0, tempStart: 32, tempFinish: 32, tempRampTime: 0}]);
+          // [{initialDwell: 0, tempStart: 60, tempFinish: 60, tempRampTime: 0}]);
     </script>
   </body>
 </html>

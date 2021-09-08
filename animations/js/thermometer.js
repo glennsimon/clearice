@@ -1,9 +1,9 @@
 // start = 'cold'|'hot'
-// timingArray = [{startDwell: <num sec>,
+// timingArray = [{initialDwell: <num sec>,
 //                 tempStart: <num degF>,
 //                 tempFinish: <num degF>,
-//                 animationTime = <num sec>}, {...}, ...]
-const thermometer = (id = 't0', start = 'cold', animationTime = 5,
+//                 tempRampTime = <num sec>}, {...}, ...]
+const thermometer = (id = 't0', start = 'cold', tempRampTime = 5,
     thermometerWidth = 50, thermometerHeight = 200, labels = false, timingArray) => {
 
   const canvasTherm = document.getElementById(id);
@@ -25,13 +25,13 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   graph.data = [];
   for (let i = 0; i < timingArray.length; i++) {
     graph.data[i] = {};
-    graph.totalTime += timingArray[i].startDwell;
-    graph.data[i].dwellEnd = graph.totalTime;
-    graph.totalTime += timingArray[i].animationTime;
-    graph.data[i].rampEnd = graph.totalTime;
-    graph.totalRampTime += timingArray[i].animationTime;
+    graph.totalTime += timingArray[i].initialDwell;
+    graph.data[i].dwellEndTime = graph.totalTime;
+    graph.totalTime += timingArray[i].tempRampTime;
+    graph.data[i].rampEndTime = graph.totalTime;
+    graph.totalRampTime += timingArray[i].tempRampTime;
     let deltaT = (timingArray[i].tempFinish - timingArray[i].tempStart);
-    graph.data[i].rampRate = deltaT / timingArray[i].animationTime;
+    graph.data[i].rampRate = deltaT / timingArray[i].tempRampTime;
     graph.totalTemp += deltaT;
   }
   let rampStartingFrac = 0;
@@ -39,9 +39,11 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
   for (let i = 0; i < timingArray.length; i++) {
     graph.data[i].rampStartingFrac = rampStartingFrac;
     graph.data[i].tempStartingFrac = tempStartingFrac;
-    graph.data[i].rampFrac = timingArray[i].animationTime / graph.totalRampTime;
-    graph.data[i].tempFrac = (timingArray[i].tempFinish - timingArray[i].tempStart) /
-      graph.totalTemp;
+    graph.data[i].rampFrac = graph.totalRampTime != 0 ?
+        timingArray[i].tempRampTime / graph.totalRampTime : 0;
+    graph.data[i].tempFrac = graph.totalTemp != 0 ?
+        (timingArray[i].tempFinish - timingArray[i].tempStart) /
+        graph.totalTemp : 0;
     rampStartingFrac += graph.data[i].rampFrac;
     tempStartingFrac += graph.data[i].tempFrac;
   }
@@ -77,17 +79,17 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
     ctxTherm.textBaseline = 'middle';
     ctxTherm.fillStyle = 'black';
     const dYdT = graph.totalTemp != 0 ?
-      (lowerColumnPosition - upperColumnPosition) /
-      (timingArray[0].tempStart - timingArray[timingArray.length - 1].tempFinish) : 0;
+      (lowerColumnPosition - upperColumnPosition) / graph.totalTemp : 0;
     const tickXStart = (thermometerWidth + shaftDia) / 2;
-    let yPos = dYdT < 0 ? lowerColumnPosition : upperColumnPosition;
+    let yPos = start === 'hot' ? upperColumnPosition : lowerColumnPosition;
+    const sign = dYdT < 0 ? -1 : 1;
     for (let i = 0; i < timingArray.length; i++) {
       ctxTherm.beginPath();
       ctxTherm.moveTo(tickXStart, yPos);
       ctxTherm.lineTo(2 * outlineThickness + tickXStart, yPos);
       ctxTherm.stroke();
       ctxTherm.fillText('' + timingArray[i].tempStart + '\xB0F', 3 * outlineThickness + tickXStart, yPos);
-      yPos += dYdT * (timingArray[i].tempStart - timingArray[i].tempFinish);
+      yPos += sign * dYdT * (timingArray[i].tempStart - timingArray[i].tempFinish);
     }
     ctxTherm.beginPath();
     ctxTherm.moveTo(tickXStart, yPos);
@@ -105,17 +107,17 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
     let fillStyle;
     let rampElapsedFrac;
     let tempElapsedFrac;
-    if (elapsedTimeSec < graph.data[segmentIndex].dwellEnd) {
+    if (elapsedTimeSec < graph.data[segmentIndex].dwellEndTime) {
       rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac;
       tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac;
     }
-    else if (elapsedTimeSec < graph.data[segmentIndex].rampEnd) {
+    else if (elapsedTimeSec < graph.data[segmentIndex].rampEndTime) {
       rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
-          graph.data[segmentIndex].rampFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
-          (timingArray[segmentIndex].animationTime);
+          graph.data[segmentIndex].rampFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEndTime) /
+          (timingArray[segmentIndex].tempRampTime);
       tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
-          graph.data[segmentIndex].tempFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEnd) /
-          (timingArray[segmentIndex].animationTime);
+          graph.data[segmentIndex].tempFrac * (elapsedTimeSec - graph.data[segmentIndex].dwellEndTime) /
+          (timingArray[segmentIndex].tempRampTime);
     }
     else {
       rampElapsedFrac = graph.data[segmentIndex].rampStartingFrac +
@@ -123,12 +125,18 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
       tempElapsedFrac = graph.data[segmentIndex].tempStartingFrac +
           graph.data[segmentIndex].tempFrac;
       segmentIndex += 1;
-      if (segmentIndex === timingArray.length) return;
     }
-    fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
-    colTop = 
-        upperColumnPosition * (1 - tempElapsedFrac) +
-        lowerColumnPosition * tempElapsedFrac;
+    if (start === 'hot') {
+      fillStyle = 'rgb(' + 255 * (1 - rampElapsedFrac) + ', 0, ' + 255 * rampElapsedFrac;
+      colTop = 
+          upperColumnPosition * (1 - tempElapsedFrac) +
+          lowerColumnPosition * tempElapsedFrac;
+    } else {
+      fillStyle = 'rgb(' + 255 * rampElapsedFrac + ', 0, ' + 255 * (1 - rampElapsedFrac);
+      colTop = 
+          upperColumnPosition * tempElapsedFrac +
+          lowerColumnPosition * (1 - tempElapsedFrac);
+    }
     let colHeight = yBulbCenter - colTop;
 
     // clear previous column
@@ -162,6 +170,8 @@ const thermometer = (id = 't0', start = 'cold', animationTime = 5,
       shaftDia - outlineThickness,
       colHeight
     );
+
+    if (segmentIndex === timingArray.length) return;
 
     // if (elapsedFrac === 1) return;
     window.requestAnimationFrame(drawTherm);
