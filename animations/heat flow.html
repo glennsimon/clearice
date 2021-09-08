@@ -115,16 +115,19 @@
         // const heatRipple = (rippleWidth = 200, rippleHeight = 20,
         //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
         //   startColor = 'red', endColor = 'yellow') => {
-          heatRipple('r1', 400, 40, 6, 60, 100);
-        // const thermometer = (id = 't0',
-        //   change = 'cooling'|'heating'|'cold'|'hot',
-        //   animationTime = 5
-        //   canvasWidth = 50, canvasHeight = 200, 
-        //   bulbDia = 40, shaftDia = 20,
-        //   outlineThickness = 3, columnTopRange = [30, 125], delay(ms)) => {
-  
-        thermometer('t1', 'cooling', 10, 100, 400, 80, 40, 4, [60, 250]);
-        thermometer('t2', 'cold', 5, 100, 400, 80, 40, 4, [60, 250]);
+        heatRipple('r1', 400, 40, 6, 60, 100);
+
+// const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
+//    thermometerHeight = 200, labels = false, timingArray) => {
+// start = 'cold'|'hot'
+// timingArray = [{initialDwell: <num sec>,
+//                 tempStart: <num degF>,
+//                 tempFinish: <num degF>,
+//                 tempRampTime = <num sec>}, {...}, ...]
+        thermometer('t1', 'hot', 100, 400, false,
+            [{initialDwell: 0, tempStart: 60, tempFinish: 0, tempRampTime: 10}]);
+        thermometer('t2', 'cold', 100, 400, false,
+            [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
       }
 
       setTimeout(showHeatFlow, 5000);

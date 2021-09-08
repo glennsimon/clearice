@@ -3,8 +3,8 @@
 //                 tempStart: <num degF>,
 //                 tempFinish: <num degF>,
 //                 tempRampTime = <num sec>}, {...}, ...]
-const thermometer = (id = 't0', start = 'cold', tempRampTime = 5,
-    thermometerWidth = 50, thermometerHeight = 200, labels = false, timingArray) => {
+const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
+    thermometerHeight = 200, labels = false, timingArray) => {
 
   const canvasTherm = document.getElementById(id);
   canvasTherm.width = labels ? 2 * thermometerWidth : thermometerWidth;

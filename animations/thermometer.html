@@ -24,12 +24,12 @@
       //                 tempStart: <num degF>,
       //                 tempFinish: <num degF>,
       //                 tempRampTime = <num sec>}, {...}, ...]
-        thermometer('t1', 'cold', 10, 100, 400, true,
-          [{initialDwell: 0, tempStart: 0, tempFinish: 32, tempRampTime: 10},
-          {initialDwell: 5, tempStart: 32, tempFinish: 60, tempRampTime: 5}]);
+        thermometer('t1', 'cold', 100, 400, true,
+          // [{initialDwell: 0, tempStart: 0, tempFinish: 32, tempRampTime: 10},
+          // {initialDwell: 5, tempStart: 32, tempFinish: 60, tempRampTime: 5}]);
           // [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 10},
           // {initialDwell: 5, tempStart: 32, tempFinish: 0, tempRampTime: 5}]);
-          // [{initialDwell: 0, tempStart: 32, tempFinish: 32, tempRampTime: 0}]);
+          [{initialDwell: 0, tempStart: 32, tempFinish: 32, tempRampTime: 0}]);
           // [{initialDwell: 0, tempStart: 60, tempFinish: 60, tempRampTime: 0}]);
     </script>
   </body>
