@@ -88,14 +88,14 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
       ctxTherm.moveTo(tickXStart, yPos);
       ctxTherm.lineTo(2 * outlineThickness + tickXStart, yPos);
       ctxTherm.stroke();
-      ctxTherm.fillText('' + timingArray[i].tempStart + '\xB0F', 3 * outlineThickness + tickXStart, yPos);
+      ctxTherm.fillText('' + timingArray[i].tempStart + '\xB0F', 4 * outlineThickness + tickXStart, yPos);
       yPos += sign * dYdT * (timingArray[i].tempStart - timingArray[i].tempFinish);
     }
     ctxTherm.beginPath();
     ctxTherm.moveTo(tickXStart, yPos);
     ctxTherm.lineTo(2 * outlineThickness + tickXStart, yPos);
     ctxTherm.stroke();
-    ctxTherm.fillText('' + timingArray[timingArray.length - 1].tempFinish + '\xB0F', 3 * outlineThickness + tickXStart, yPos);
+    ctxTherm.fillText('' + timingArray[timingArray.length - 1].tempFinish + '\xB0F', 4 * outlineThickness + tickXStart, yPos);
   }
 
   let startTime = Date.now();

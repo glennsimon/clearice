@@ -33,56 +33,74 @@
         z-index: 0;
       }
       #t1 {
-        top: 50%;
-        transform: translate(300px, 80%);
+        top: 42%;
+        left: 28%;
+        /* transform: translate(300px, 80%); */
         opacity: 0;
-        animation: disappear 19s 3s ease-in forwards;
+        transform: scale(75%);
+        /* animation: disappear 19s 3s ease-in forwards; */
+        animation: appear 3s 3s forwards, reposition-t1 3s 22s forwards;
         z-index: 10;
       }
       #t2 {
-        top: 50%;
-        transform: translate(680px, -150%);
-        animation: disappear 22s forwards;
+        top: 25%;
+        left: 70%;
+        /* transform: translate(680px, -150%); */
+        animation: reposition-t2 3s 22s forwards;
         z-index: 10;
       }
-      .heat-ripple {
+      /* .heat-ripple {
         opacity: 0;
-        animation: disappear 19s 3s ease-in forwards;
-      }
+        animation: disappear 45s 3s ease-in forwards;
+      } */
       #r1 {
         top: 55%;
         left: 47%;
         transform: translate(-50%, -50%) rotate(-95deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r1 3s 22s ease-in-out forwards;
       }
       #r2 {
         top: 55%;
         left: 53%;
         transform: translate(-50%, -50%) rotate(-85deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r2 3s 22s ease-in-out forwards;
       }
       #r3 {
         top: 65%;
         left: 60%;
         transform: translate(-50%, -50%) rotate(-5deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r3 3s 22s ease-in-out forwards;
       }
       #r4 {
         top: 80%;
         left: 59%;
         transform: translate(-50%, -50%) rotate(30deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r4 3s 22s ease-in-out forwards;
       }
       #r5 {
         top: 87%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(90deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r5 3s 22s ease-in-out forwards;
       }
       #r6 {
         top: 80%;
         left: 41%;
         transform: translate(-50%, -50%) rotate(150deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r6 3s 22s ease-in-out forwards;
       }
       #r7 {
         top: 65%;
         left: 40%;
         transform: translate(-50%, -50%) rotate(185deg);
+        opacity: 0;
+        animation: disappear 42s 2s ease-in forwards, reposition-r7 3s 22s ease-in-out forwards;
       }
       #heat-flow {
         font-family: Arial, Helvetica, sans-serif;
@@ -376,7 +394,7 @@
         left: 430.5px;
         width: 99px;
         height: 90px;
-        background: rgba(0,0,255,.3);
+        background: rgba(0,0,255,.35);
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(49.5px 10px, 98.5px 10px, 94.5px 90px, 49.5px 90px, 49.5px 10px);
@@ -400,7 +418,7 @@
         left: 430.5px;
         width: 99px;
         height: 90px;
-        background: rgba(0,0,255,.3);
+        background: rgba(0,0,255,.35);
         transform-origin: 49.5px 90px;
         transform: rotateY(90deg)  translateX(200px) translateZ(44.9px) rotateX(-2.866deg);
         clip-path: polygon(49.5px 10px, 98.5px 10px, 94.5px 90px, 49.5px 90px, 49.5px 10px);
@@ -424,7 +442,7 @@
         left: 430.95px;
         width: 98px;
         height: 98px;
-        background: rgba(0,0,255,0.3);
+        background: rgba(0,0,255,0.25);
         transform: rotateX(90deg) translate3D(0, -200px, -109.85px);
         clip-path: polygon(0 0, 98px 0, 98px 49px, 0 49px, 0 0);
         opacity: 0;
@@ -482,6 +500,23 @@
         95.7% { opacity: 1; }
         to { opacity: 0; }
       }
+      @keyframes reposition-t1 {
+        to { 
+          top: 25%;
+          left: 15%;
+          transform: scale(100%);
+        }
+      }
+      @keyframes reposition-t2 {
+        to { top: 10%; left: 85%; }
+      }
+      @keyframes reposition-r1 { to { top: 20%; left: 43%; } }
+      @keyframes reposition-r2 { to { top: 20%; left: 57%; } }
+      @keyframes reposition-r3 { to { top: 40%; left: 68%; } }
+      @keyframes reposition-r4 { to { top: 69%; left: 67%; } }
+      @keyframes reposition-r5 { to { top: 79%; } }
+      @keyframes reposition-r6 { to { top: 69%; left: 33%; } }
+      @keyframes reposition-r7 { to { top: 40%; left: 32%; } }
     </style>
   </head>
   <body>
@@ -568,9 +603,10 @@
 //                 tempStart: <num degF>,
 //                 tempFinish: <num degF>,
 //                 tempRampTime = <num sec>}, {...}, ...]
-      thermometer('t1', 'hot', 20, 80, false,
-          [{initialDwell: 0, tempStart: 60, tempFinish: 0, tempRampTime: 25}]);
-      thermometer('t2', 'cold', 20, 80, false,
+      thermometer('t1', 'hot', 50, 200, true,
+          [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 25},
+          {initialDwell: 15, tempStart: 32, tempFinish: 0, tempRampTime: 5}]);
+      thermometer('t2', 'cold', 25, 100, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
 
       const waterCsec = document.getElementById('water-csec');
@@ -585,11 +621,11 @@
       let particleSpeed = 5;
       const animationTime = 35;
       const particleData = [];
-      const numParticles = 40;
+      const numParticles = 50;
       const particleDia = 5;
       const minSpeed = 20;
       const maxSpeed = 20;
-      const maxSize = 2;
+      const maxSize = 1;
 
       for (let particleNum = 0; particleNum < numParticles; particleNum++) {
         const particle = {};
@@ -600,11 +636,10 @@
         particle.vX = speed * Math.cos(angle);
         particle.vY = speed * Math.sin(angle);
         particle.size = 1 + Math.random() * maxSize;
-        particle.color = 'rgba(' + Math.floor(200 + Math.random() * 55) + ',' +
-          Math.floor(200 + Math.random() * 55) + ',' +
-          Math.floor(200 + Math.random() * 55) + ',' +
+        particle.color = 'rgba(' + Math.floor(230 + Math.random() * 25) + ',' +
+          Math.floor(230 + Math.random() * 25) + ',' +
+          Math.floor(230 + Math.random() * 25) + ',' +
           '1)';
-          // '0.3)';
           particle.xLoc = maxSize + Math.random() * (waterCsec.width - 2 * maxSize);
         particle.yLoc = maxSize + Math.random() * (waterCsec.height - 2 * maxSize);        
         particleData[particleNum] = particle;
@@ -615,8 +650,8 @@
       const bottomLeftX = 9;
       const bottomRightX = 211;
 
-      // let startTime = Date.now() + 25000;
-      let startTime = Date.now();
+      let startTime = Date.now() + 25000;
+      // let startTime = Date.now();
       let newTime;
       let lastTime = startTime;
       let diffTime;
@@ -655,8 +690,15 @@
         ctxWaterBub.arcTo(xOffset + yOffset * invSideSlope, yOffset, 110, yOffset, radius);
         ctxWaterBub.lineTo(topRightX / 2, yOffset);
 
-        ctxWaterBub.fillStyle = 'rgba(0,0,255,.1)'
-        ctxWaterBub.shadowColor = 'rgba(0,0,255,1)'
+        ctxWaterBub.fillStyle = 'rgba(0,0,255,.1)';
+        ctxWaterBub.shadowColor = 'rgba(0,0,255,1)';
+        if (elapsedFrac > 0.35) {
+          ctxWaterBub.fillStyle = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
+              255 * (elapsedFrac - 0.35) / 0.05 + ',255,' +
+              0.1 * (1 + (elapsedFrac - 0.35) / 0.05) + ')';
+          ctxWaterBub.shadowColor = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
+              255 * (elapsedFrac - 0.35) / 0.05 + ',255,1)';
+        }
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
         // ctxWaterBub.strokeStyle = 'rgba(0,0,255,.1)'
@@ -795,8 +837,8 @@
         window.requestAnimationFrame(drawWater);
       }
 
-      // setTimeout(drawWater, 25000);
-      drawWater();
+      setTimeout(drawWater, 25000);
+      // drawWater();
     </script>
   </body>
 </html>
