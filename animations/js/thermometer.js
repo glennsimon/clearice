@@ -143,9 +143,9 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     ctxTherm.fillStyle = 'white';
     ctxTherm.beginPath();
     ctxTherm.fillRect(
-      (thermometerWidth - shaftDia + outlineThickness) / 2,
+      (thermometerWidth - shaftDia + 1.35 * outlineThickness) / 2,
       upperColumnPosition,
-      shaftDia - outlineThickness,
+      shaftDia - 1.35 * outlineThickness,
       lowerColumnPosition
     );
 
@@ -165,9 +165,9 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     // draw new column
     ctxTherm.beginPath();
     ctxTherm.fillRect(
-      (thermometerWidth - shaftDia + outlineThickness) / 2,
+      (thermometerWidth - shaftDia + 1.1 * outlineThickness) / 2,
       colTop,
-      shaftDia - outlineThickness,
+      shaftDia - 1.1 * outlineThickness,
       colHeight
     );
 
