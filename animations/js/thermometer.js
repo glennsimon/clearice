@@ -139,7 +139,7 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     }
     let colHeight = yBulbCenter - colTop;
 
-    // clear previous column
+    // clear previous column - 1.35 multiple adjusts for bleed
     ctxTherm.fillStyle = 'white';
     ctxTherm.beginPath();
     ctxTherm.fillRect(
@@ -162,7 +162,7 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     ctxTherm.stroke();
     ctxTherm.fill();
 
-    // draw new column
+    // draw new column - 1.1 multiple adjusts for bleed
     ctxTherm.beginPath();
     ctxTherm.fillRect(
       (thermometerWidth - shaftDia + 1.1 * outlineThickness) / 2,

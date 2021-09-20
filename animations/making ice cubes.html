@@ -658,7 +658,31 @@
       let newTime;
       let lastTime = startTime;
       let diffTime;
+      let clearLeaders = true;
       const drawWater = () => {
+        if (clearLeaders) {
+          ctxLeaders.clearRect(0, 0, 960, 540);
+          const style = document.head.getElementsByTagName('style')[0];
+          style.innerHTML += `
+#leaders { 
+  opacity: 1;
+  z-index: 30;
+  animation: null;
+}`;
+          ctxLeaders.beginPath();
+          ctxLeaders.moveTo(190, 310);
+          ctxLeaders.lineTo(480, 270);
+          ctxLeaders.lineWidth = 1;
+          ctxLeaders.stroke();
+          ctxLeaders.arc(480, 270, 3, 0, 2 * Math.PI);
+          ctxLeaders.fill();
+          ctxLeaders.textBaseline = 'top';
+          ctxLeaders.textAlign = 'center';
+          ctxLeaders.font = '25px sans-serif';
+          ctxLeaders.fillText('LIQUID', 170, 350);
+          ctxLeaders.fillText('CENTER', 170, 380);
+          clearLeaders = false;
+        }
         newTime = Date.now();
         diffTime = (newTime - lastTime) / 1000;
         lastTime = newTime;
@@ -704,25 +728,6 @@
         }
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
-        // ctxWaterBub.strokeStyle = 'rgba(0,0,255,.1)'
-        // ctxWaterBub.lineWidth = 10;
-        // ctxWaterBub.stroke();
-
-        // if (elapsedFrac > 0.3) {
-          // const gradient = ctxWaterBub.createRadialGradient(110, 90, 0, 110, 90, 100);
-          // const gradient = ctxWaterBub.createRadialGradient(0, 0, 0, 0, 0, 25);
-          // gradient.addColorStop(0, 'rgba(200,255,255,0.7');
-          // gradient.addColorStop(1, 'rgba(200,255,255,0');
-          // gradient.addColorStop(0, 'rgba(200,255,255,0.7');
-          // gradient.addColorStop(.7, 'rgba(200,255,255,0.7');
-          // gradient.addColorStop(.8, 'rgba(200,255,255,0');
-          // ctxWaterBub.fillStyle = gradient;
-          // ctxWaterBub.fill();
-          // ctxWaterBub.strokeStyle = 'rgba(200,255,255,0.5)';
-          // ctxWaterBub.strokeStyle = gradient;
-          // ctxWaterBub.lineWidth = 25;
-          // ctxWaterBub.stroke();
-        // }
 
         for (let particleNum = 0; particleNum < numParticles; particleNum++) {
           ctxWaterBub.beginPath();
