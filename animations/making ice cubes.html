@@ -681,14 +681,27 @@
           ctxLeaders.font = '25px sans-serif';
           ctxLeaders.fillText('LIQUID', 170, 350);
           ctxLeaders.fillText('CENTER', 170, 380);
+
+          ctxLeaders.fillText('CLEAR ICE', 770, 308);
+
           clearLeaders = false;
         }
+
         newTime = Date.now();
         diffTime = (newTime - lastTime) / 1000;
         lastTime = newTime;
 
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
         const elapsedFrac = elapsedTimeSec / animationTime;
+
+        ctxLeaders.clearRect(500, 250, 205, 70);
+        ctxLeaders.beginPath();
+        ctxLeaders.moveTo(700, 310);
+        ctxLeaders.lineTo(-20 * elapsedFrac / 0.4 + 585, 270);
+        ctxLeaders.lineWidth = 1;
+        ctxLeaders.stroke();
+        ctxLeaders.arc(-20 * elapsedFrac / 0.4 + 585, 270, 3, 0, 2 * Math.PI);
+        ctxLeaders.fill();
 
         ctxWater.clearRect(0, 0, waterCsec.width, waterCsec.height);
         ctxWaterBub.clearRect(0, 0, waterBubble.width, waterBubble.height);
@@ -725,6 +738,14 @@
               0.1 * (1 + (elapsedFrac - 0.35) / 0.05) + ')';
           ctxWaterBub.shadowColor = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
               255 * (elapsedFrac - 0.35) / 0.05 + ',255,1)';
+          ctxLeaders.clearRect(100, 335, 140, 40);
+          ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
+              1 * (0.4 - elapsedFrac) / 0.05 + ')';
+          ctxLeaders.fillText('LIQUID', 170, 350);
+          ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
+              1 * (elapsedFrac - 0.35) / 0.05 + ')';
+          ctxLeaders.fillText('FROZEN', 170, 350);
+          ctxLeaders.fillStyle = 'black';
         }
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
