@@ -143,11 +143,19 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     ctxTherm.fillStyle = 'white';
     ctxTherm.beginPath();
     ctxTherm.fillRect(
-      (thermometerWidth - shaftDia + 1.35 * outlineThickness) / 2,
+      (thermometerWidth - shaftDia + outlineThickness) / 2,
       upperColumnPosition,
-      shaftDia - 1.35 * outlineThickness,
+      shaftDia - outlineThickness,
       lowerColumnPosition
     );
+
+    // draw thermometer shaft lines
+    ctxTherm.beginPath();
+    ctxTherm.moveTo((thermometerWidth - shaftDia) / 2, 0.8 * thermometerHeight);
+    ctxTherm.lineTo((thermometerWidth - shaftDia) / 2, thermometerWidth / 2);
+    ctxTherm.moveTo((thermometerWidth + shaftDia) / 2, thermometerWidth / 2);
+    ctxTherm.lineTo((thermometerWidth + shaftDia) / 2, 0.8 * thermometerHeight);
+    ctxTherm.stroke();
 
     // draw bulb color and outline
     ctxTherm.fillStyle = fillStyle;
@@ -165,9 +173,9 @@ const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
     // draw new column - 1.1 multiple adjusts for bleed
     ctxTherm.beginPath();
     ctxTherm.fillRect(
-      (thermometerWidth - shaftDia + 1.1 * outlineThickness) / 2,
+      (thermometerWidth - shaftDia + outlineThickness) / 2,
       colTop,
-      shaftDia - 1.1 * outlineThickness,
+      shaftDia - outlineThickness,
       colHeight
     );
 
