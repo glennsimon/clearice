@@ -118,6 +118,7 @@
         width: 960px;
         height: 540px;
         /* visibility: hidden; */
+        /* transform: rotateX(-5deg) translateY(10px) rotateY(90deg); */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
         animation: zoom-in 3s 22s forwards;
@@ -129,126 +130,127 @@
         width: 960px;
         height: 540px;
         /* visibility: hidden; */
+        /* transform: rotateX(-5deg) translateY(10px) rotateY(90deg); */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
         animation: zoom-in 3s 22s forwards;
       }
       #cup-far-bottom {
-        top: 220px;
-        left: 430px;
-        width: 100px;
-        height: 100px;
+        top: 175px;
+        left: 330px;
+        width: 300px;
+        height: 210px;
         background: rgba(255,255,255,.4);
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
-        clip-path: polygon(0 0, 100px 0, 100px 50px, 0 50px, 0 0);
+        clip-path: polygon(0 0, 300px 0, 300px 105px, 0 105px, 0 0);
         opacity: 0;
         animation: appear 3s 3s forwards;
       }
       #cup-far-bottom-upr {
-        top: 225px;
-        left: 435px;
-        width: 90px;
-        height: 90px;
+        top: 190px;
+        left: 345px;
+        width: 270px;
+        height: 180px;
         background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -190px);
-        clip-path: polygon(0 0, 90px 0, 90px 45px, 0 45px, 0 0);
+        transform: rotateX(90deg) translate3D(0, -200px, -185px);
+        clip-path: polygon(0 0, 270px 0, 270px 90px, 0 90px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: appear 3s 3s forwards;
       }
       #cup-near-bottom {
-        top: 220px;
-        left: 430px;
-        width: 100px;
-        height: 100px;
+        top: 175px;
+        left: 330px;
+        width: 300px;
+        height: 210px;
         background: rgba(255,255,255,.4);
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
-        clip-path: polygon(0 50px, 100px 50px, 100px 100px, 0 100px, 0 50px);
+        clip-path: polygon(0 105px, 300px 105px, 300px 210px, 0 210px, 0 105px);
         opacity: 0;
         animation: disappear 23s 3s forwards;
       }
       #cup-near-bottom-upr {
-        top: 225px;
-        left: 435px;
-        width: 90px;
-        height: 90px;
+        top: 190px;
+        left: 345px;
+        width: 270px;
+        height: 180px;
         background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -190px);
-        clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
+        transform: rotateX(90deg) translate3D(0, -200px, -185px);
+        clip-path: polygon(0 90px, 270px 90px, 270px 180px, 0 180px, 0 90px);
         opacity: 0;
         animation: disappear 23s 3s forwards;
       }
       #cup-far-lip {
-        top: 215px;
-        left: 425px;
-        width: 110px;
-        height: 110px;
+        top: 170px;
+        left: 325px;
+        width: 310px;
+        height: 220px;
         background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
-        clip-path: polygon(0 0, 110px 0, 110px 55px, 104.5px 55px, 104.5px 5.5px, 5.5px 5.5px, 5.5px 55px, 0 55px, 0 0);
+        transform: rotateX(90deg) translate3D(0, -200px, -50px);
+        clip-path: polygon(0 0, 310px 0, 310px 110px, 295px 110px, 295px 15px, 15px 15px, 15px 110px, 0 110px, 0 0);
         opacity: 0;
         animation: appear 3s 3s forwards;
       }
       #cup-near-lip {
-        top: 215px;
-        left: 425px;
-        width: 110px;
-        height: 110px;
+        top: 170px;
+        left: 325px;
+        width: 310px;
+        height: 220px;
         background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
-        clip-path: polygon(0 110px, 110px 110px, 110px 55px, 104.5px 55px, 104.5px 104.5px, 5.5px 104.5px, 5.5px 55px, 0 55px, 0 110px);
+        transform: rotateX(90deg) translate3D(0, -200px, -50px);
+        clip-path: polygon(0 220px, 310px 220px, 310px 110px, 295px 110px, 295px 205px, 15px 205px, 15px 110px, 0 105px, 0 220px);
         opacity: 0;
         animation: disappear 23s 3s forwards;
       }
       #cup-front {
-        top: 370px;
-        left: 425px;
-        width: 110px;
-        height: 100px;
+        top: 330px;
+        left: 325px;
+        width: 310px;
+        height: 150px;
         background: rgba(255,255,255,.4);
-        transform-origin: 55px 100px;
-        transform: translateZ(-150px) rotateX(-2.866deg);
-        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+        transform-origin: 155px 150px;
+        transform: translateZ(-95px) rotateX(-1.909deg);
+        clip-path: polygon(0 0, 310px 0, 305px 150px, 5px 150px, 0 0);
         opacity: 0;
         animation: disappear 23s 3s forwards;
       }
       #cup-front-inner {
-        top: 370px;
-        left: 430.5px;
-        width: 99px;
-        height: 90px;
+        top: 330px;
+        left: 340px;
+        width: 280px;
+        height: 135px;
         background: rgba(255,255,255,.4);
-        transform-origin: 49.5px 90px;
-        transform: translateZ(-155px) rotateX(-2.866deg);
-        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+        transform-origin: 140px 135px;
+        transform: translateZ(-110px) rotateX(-1.909deg);
+        clip-path: polygon(0 0, 280px 0, 275px 135px, 5px 135px, 0 0);
         opacity: 0;
         animation: disappear 23s 3s forwards;
       }
       #cup-back {
-        top: 370px;
-        left: 425px;
-        width: 110px;
-        height: 100px;
+        top: 330px;
+        left: 325px;
+        width: 310px;
+        height: 150px;
         background: rgba(255,255,255,.4);
-        transform-origin: 55px 100px;
-        transform: translateZ(-250px) rotateX(2.866deg);
-        clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
+        transform-origin: 155px 150px;
+        transform: translateZ(-305px) rotateX(1.909deg);
+        clip-path: polygon(0 0, 310px 0, 305px 150px, 5px 150px, 0 0);
         opacity: 0;
         animation: appear 3s 3s forwards;
       }
       #cup-back-inner {
-        top: 370px;
-        left: 430.5px;
-        width: 99px;
-        height: 90px;
+        top: 330px;
+        left: 340px;
+        width: 280px;
+        height: 135px;
         background: rgba(255,255,255,.4);
-        transform-origin: 49.5px 90px;
-        transform: translateZ(-245px) rotateX(2.866deg);
-        clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
+        transform-origin: 140px 135px;
+        transform: translateZ(-290px) rotateX(1.909deg);
+        clip-path: polygon(0 0, 280px 0, 275px 135px, 5px 135px, 0 0);
         opacity: 0;
         animation: appear 3s 3s forwards;
       }
       #cup-far-left {
-        top: 370px;
+        top: 330px;
         left: 425px;
         width: 110px;
         height: 100px;
@@ -260,7 +262,7 @@
         animation: appear 3s 3s forwards;
       }
       #cup-far-left-inner {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -272,7 +274,7 @@
         animation: appear 3s 3s forwards;
       }
       #cup-near-left {
-        top: 370px;
+        top: 330px;
         left: 425px;
         width: 110px;
         height: 100px;
@@ -284,7 +286,7 @@
         animation: disappear 23s 3s forwards;
       }
       #cup-near-left-inner {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -296,7 +298,7 @@
         animation: disappear 23s 3s forwards;
       }
       #cup-far-right {
-        top: 370px;
+        top: 330px;
         left: 425px;
         width: 110px;
         height: 100px;
@@ -308,7 +310,7 @@
         animation: appear 3s 3s forwards;
       }
       #cup-far-right-inner {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -320,7 +322,7 @@
         animation: appear 3s 3s forwards;
       }
       #cup-near-right {
-        top: 370px;
+        top: 330px;
         left: 425px;
         width: 110px;
         height: 100px;
@@ -332,7 +334,7 @@
         animation: disappear 23s 3s forwards;
       }
       #cup-near-right-inner {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -366,7 +368,7 @@
         animation: disappear 23s 3s forwards;
       }
       #water-front {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -378,7 +380,7 @@
         animation: disappear 23s 3s forwards;
       }
       #water-back {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -390,7 +392,7 @@
         animation: appear 3s 3s forwards;
       }
       #water-far-left {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -402,7 +404,7 @@
         animation: appear 3s 3s forwards;
       }
       #water-near-left {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -414,7 +416,7 @@
         animation: disappear 23s 3s forwards;
       }
       #water-far-right {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -426,7 +428,7 @@
         animation: appear 3s 3s forwards;
       }
       #water-near-right {
-        top: 370px;
+        top: 330px;
         left: 430.5px;
         width: 99px;
         height: 90px;
@@ -486,6 +488,7 @@
       }
       @keyframes zoom-in {
         to { 
+          /* transform: translate3D(200px, -150px, 300px) rotateY(90deg); */
           transform: translate3D(0, -150px, 700px);
         }
       }
