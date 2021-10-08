@@ -20,7 +20,7 @@
         background-image: url('images/icebox.png');
         background-size: contain;
         background-repeat: no-repeat;
-        animation: zoom-in-freezer 3s 22s forwards;
+        animation: zoom-in-freezer 3s 21s forwards;
         z-index: -1;
       }
       #extras {
@@ -29,24 +29,30 @@
       }
       #leaders {
         opacity: 0;
-        animation: disappear 19s 3s ease-in forwards;
+        animation: disappear 18s 3s ease-in forwards;
         z-index: 0;
+      }
+      #clear-ice {
+        top: 0;
+        opacity: 0;
+        animation: appear 2s 32s forwards, drop 24s 32s linear forwards;
+        z-index: 30;
       }
       #t1 {
         top: 42%;
-        left: 28%;
+        left: 25%;
         /* transform: translate(300px, 80%); */
         opacity: 0;
         transform: scale(75%);
         /* animation: disappear 19s 3s ease-in forwards; */
-        animation: appear 3s 3s forwards, reposition-t1 3s 22s forwards;
+        animation: appear 3s 3s forwards, reposition-t1 3s 21s forwards;
         z-index: 10;
       }
       #t2 {
         top: 25%;
         left: 70%;
         /* transform: translate(680px, -150%); */
-        animation: reposition-t2 3s 22s forwards;
+        animation: reposition-t2 3s 21s forwards;
         z-index: 10;
       }
       /* .heat-ripple {
@@ -54,53 +60,39 @@
         animation: disappear 45s 3s ease-in forwards;
       } */
       #r1 {
-        top: 55%;
-        left: 47%;
-        transform: translate(-50%, -50%) rotate(-95deg);
+        top: 50%;
+        left: 40%;
+        transform: translate(-50%, -50%) rotate(-90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r1 3s 22s ease-in-out forwards;
+        animation: appear 3s 3s ease-in forwards, reposition-r1 3s 21s ease-in-out forwards;
       }
       #r2 {
-        top: 55%;
-        left: 53%;
-        transform: translate(-50%, -50%) rotate(-85deg);
+        top: 50%;
+        left: 45%;
+        transform: translate(-50%, -50%) rotate(-90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r2 3s 22s ease-in-out forwards;
+        animation: appear 3s 3s ease-in forwards, reposition-r2 3s 21s ease-in-out forwards;
       }
       #r3 {
-        top: 65%;
-        left: 60%;
-        transform: translate(-50%, -50%) rotate(-5deg);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r3 3s 22s ease-in-out forwards;
+        animation: appear 3s 3s ease-in forwards, reposition-r3 3s 21s ease-in-out forwards;
       }
       #r4 {
-        top: 80%;
-        left: 59%;
-        transform: translate(-50%, -50%) rotate(30deg);
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%) rotate(-90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r4 3s 22s ease-in-out forwards;
+        animation: appear 3s 3s ease-in forwards, reposition-r4 3s 21s ease-in-out forwards;
       }
       #r5 {
-        top: 87%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(90deg);
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%) rotate(-90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r5 3s 22s ease-in-out forwards;
-      }
-      #r6 {
-        top: 80%;
-        left: 41%;
-        transform: translate(-50%, -50%) rotate(150deg);
-        opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r6 3s 22s ease-in-out forwards;
-      }
-      #r7 {
-        top: 65%;
-        left: 40%;
-        transform: translate(-50%, -50%) rotate(185deg);
-        opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r7 3s 22s ease-in-out forwards;
+        animation: appear 3s 3s ease-in forwards, reposition-r5 3s 21s ease-in-out forwards;
       }
       #heat-flow {
         font-family: Arial, Helvetica, sans-serif;
@@ -121,7 +113,7 @@
         /* transform: rotateX(-5deg) translateY(10px) rotateY(90deg); */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 3s 22s forwards;
+        animation: zoom-in 3s 21s forwards;
       }
       #cup-near {
         position: absolute;
@@ -133,7 +125,7 @@
         /* transform: rotateX(-5deg) translateY(10px) rotateY(90deg); */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 3s 22s forwards;
+        animation: zoom-in 3s 21s forwards;
       }
       #cup-far-bottom {
         top: 175px;
@@ -166,7 +158,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
         clip-path: polygon(0 105px, 300px 105px, 300px 210px, 0 210px, 0 105px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-near-bottom-upr {
         top: 190px;
@@ -177,7 +169,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -185px);
         clip-path: polygon(0 90px, 270px 90px, 270px 180px, 0 180px, 0 90px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-far-lip {
         top: 170px;
@@ -199,7 +191,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -50px);
         clip-path: polygon(0 220px, 310px 220px, 310px 110px, 295px 110px, 295px 205px, 15px 205px, 15px 110px, 0 105px, 0 220px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-front {
         top: 330px;
@@ -211,7 +203,7 @@
         transform: translateZ(-95px) rotateX(-1.909deg);
         clip-path: polygon(0 0, 310px 0, 305px 150px, 5px 150px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-front-inner {
         top: 330px;
@@ -223,7 +215,7 @@
         transform: translateZ(-110px) rotateX(-1.909deg);
         clip-path: polygon(0 0, 280px 0, 275px 135px, 5px 135px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-back {
         top: 330px;
@@ -283,7 +275,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-150px) rotateX(1.909deg);
         clip-path: polygon(0 0, 110px 0, 110px 150px, 5px 150px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-near-left-inner {
         top: 330px;
@@ -295,7 +287,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-135px) rotateX(1.909deg);
         clip-path: polygon(0 0, 95px 0, 95px 135px, 5px 135px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-far-right {
         top: 330px;
@@ -331,7 +323,7 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(150px) rotateX(-1.909deg);
         clip-path: polygon(0 0, 110px 0, 110px 150px, 5px 150px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #cup-near-right-inner {
         top: 330px;
@@ -343,7 +335,7 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(135px) rotateX(-1.909deg);
         clip-path: polygon(0 0, 95px 0, 95px 135px, 5px 135px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #water-far-bottom {
         top: 190px;
@@ -365,7 +357,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -185px);
         clip-path: polygon(0 90px, 270px 90px, 270px 180px, 0 180px, 0 90px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #water-front {
         top: 330px;
@@ -377,7 +369,7 @@
         transform: translateZ(-110px) rotateX(-1.909deg);
         clip-path: polygon(0.5px 10px, 280px 10px, 275px 135px, 5px 135px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #water-back {
         top: 330px;
@@ -413,7 +405,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-135px) rotateX(1.909deg);
         clip-path: polygon(0.5px 10px, 95px 10px, 95px 135px, 5px 135px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #water-far-right {
         top: 330px;
@@ -437,30 +429,8 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(134.9px) rotateX(-1.909deg);
         clip-path: polygon(0.5px 10px, 95px 10px, 95px 135px, 5px 135px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
-      /* #cup-far-lip {
-        top: 170px;
-        left: 325px;
-        width: 310px;
-        height: 220px;
-        background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -50px);
-        clip-path: polygon(0 0, 310px 0, 310px 110px, 295px 110px, 295px 15px, 15px 15px, 15px 110px, 0 110px, 0 0);
-        opacity: 0;
-        animation: appear 3s 3s forwards;
-      }
-      #cup-near-lip {
-        top: 170px;
-        left: 325px;
-        width: 310px;
-        height: 220px;
-        background: rgba(255,255,255,.4);
-        transform: rotateX(90deg) translate3D(0, -200px, -50px);
-        clip-path: polygon(0 220px, 310px 220px, 310px 110px, 295px 110px, 295px 205px, 15px 205px, 15px 110px, 0 105px, 0 220px);
-        opacity: 0;
-        animation: disappear 23s 3s forwards;
-      } */
       #water-far-top {
         top: 185px;
         left: 340px;
@@ -481,17 +451,17 @@
         transform: rotateX(90deg) translate3D(0, -200px, -60px);
         clip-path: polygon(0 95px, 280px 95px, 280px 190px, 0 190px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 21s 3s forwards;
       }
       #water-csec {
-        top: 180.5px;
-        left: 370px;
+        top: 90.5px;
+        left: 167px;
         opacity: 1;
         z-index: 10;
       }
       #water-bubble {
-        top: 180.5px;
-        left: 370px;
+        top: 90.5px;
+        left: 167px;
         opacity: 1;
         z-index: 20;
       }
@@ -515,7 +485,8 @@
         }
       }
       @keyframes zoom-in-freezer {
-        to { transform: scale(190%) translateY(-100px); }
+        /* to { transform: scale(190%) translateY(-100px); } */
+        to { transform: scaleX(200%) scaleY(150%) translateY(-75px); }
       }
       @keyframes appear {
         to { opacity: 1; }
@@ -528,20 +499,20 @@
       @keyframes reposition-t1 {
         to { 
           top: 25%;
-          left: 6%;
+          left: 4%;
           transform: scale(100%);
         }
       }
       @keyframes reposition-t2 {
         to { top: 10%; left: 90%; }
       }
-      @keyframes reposition-r1 { to { top: 20%; left: 43%; } }
-      @keyframes reposition-r2 { to { top: 20%; left: 57%; } }
-      @keyframes reposition-r3 { to { top: 40%; left: 68%; } }
-      @keyframes reposition-r4 { to { top: 68%; left: 67%; } }
-      @keyframes reposition-r5 { to { top: 79%; } }
-      @keyframes reposition-r6 { to { top: 68%; left: 33%; } }
-      @keyframes reposition-r7 { to { top: 40%; left: 32%; } }
+      @keyframes reposition-r1 { to { top: 10%; left: 25%; } }
+      @keyframes reposition-r2 { to { top: 10%; left: 37.5%; } }
+      @keyframes reposition-r3 { to { top: 10%; } }
+      @keyframes reposition-r4 { to { top: 10%; left: 62.5%; } }
+      @keyframes reposition-r5 { to { top: 10%; left: 75%} }
+
+      @keyframes drop { to { top: 48px; } }
     </style>
   </head>
   <body>
@@ -557,8 +528,7 @@
         <canvas class='heat-ripple' id='r3'></canvas>
         <canvas class='heat-ripple' id='r4'></canvas>
         <canvas class='heat-ripple' id='r5'></canvas>
-        <canvas class='heat-ripple' id='r6'></canvas>
-        <canvas class='heat-ripple' id='r7'></canvas>
+        <canvas id='clear-ice'></canvas>
       </div>
       <div id="cup-far">
         <div id="cup-far-bottom"></div>
@@ -607,22 +577,37 @@
       heatRipple('r3', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r4', 50, 5, 2, 10, 50, 'orange', 'lightblue');
       heatRipple('r5', 50, 5, 2, 10, 50, 'orange', 'lightblue');
-      heatRipple('r6', 50, 5, 2, 10, 50, 'orange', 'lightblue');
-      heatRipple('r7', 50, 5, 2, 10, 50, 'orange', 'lightblue');
 
       const leaders = document.getElementById('leaders');
       leaders.width = 960;
       leaders.height = 540;
       const ctxLeaders = leaders.getContext('2d');
+
+      //leader from thermometer to water
       ctxLeaders.beginPath();
-      ctxLeaders.moveTo(315, 385);
-      ctxLeaders.lineTo(480, 395);
+      ctxLeaders.moveTo(280, 385);
+      ctxLeaders.lineTo(480, 375);
       ctxLeaders.strokeStyle = 'black';
       ctxLeaders.lineWidth = 1;
       ctxLeaders.stroke();
-      ctxLeaders.arc(480, 395, 3, 0, 2 * Math.PI);
+      ctxLeaders.beginPath();
+      ctxLeaders.arc(480, 375, 3, 0, 2 * Math.PI);
       ctxLeaders.fillStyle = 'black';
       ctxLeaders.fill();
+
+      // leader and text to insulation
+      // ctxLeaders.textBaseline = 'top';
+      ctxLeaders.textAlign = 'center';
+      ctxLeaders.font = '20px sans-serif';
+      ctxLeaders.beginPath();
+      ctxLeaders.moveTo(680, 350);
+      ctxLeaders.lineTo(610, 390);
+      ctxLeaders.stroke();
+      ctxLeaders.beginPath();
+      ctxLeaders.arc(610, 390, 3, 0, 2 * Math.PI);
+      ctxLeaders.fill();
+      ctxLeaders.fillText('INSULATED', 750, 320);
+      ctxLeaders.fillText('WALLS & FLOOR', 750, 345);
 
 // const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
 //    thermometerHeight = 200, labels = false, timingArray) => {
@@ -633,18 +618,27 @@
 //                 tempRampTime = <num sec>}, {...}, ...]
       thermometer('t1', 'hot', 50, 200, true,
           [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 25},
-          {initialDwell: 15, tempStart: 32, tempFinish: 0, tempRampTime: 15}]);
+          {initialDwell: 10000, tempStart: 32, tempFinish: 0, tempRampTime: 15}]);
       thermometer('t2', 'cold', 25, 100, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
 
+      const topLeftX = 0;
+      const topRightX = 626;
+      const bottomLeftX = 9;
+      const bottomRightX = topRightX - bottomLeftX;
+
       const waterCsec = document.getElementById('water-csec');
-      waterCsec.width = 220;
-      waterCsec.height = 180;
+      waterCsec.width = topRightX;
+      waterCsec.height = 281;
       const ctxWater = waterCsec.getContext('2d');
       const waterBubble = document.getElementById('water-bubble');
-      waterBubble.width = 220;
-      waterBubble.height = 180;
+      waterBubble.width = topRightX;
+      waterBubble.height = 281;
       const ctxWaterBub = waterBubble.getContext('2d');
+      const clearIce = document.getElementById('clear-ice');
+      clearIce.width = 960;
+      clearIce.height = 200;
+      const ctxClearIce = clearIce.getContext('2d');
 
       let particleSpeed = 5;
       const animationTime = 35;
@@ -673,12 +667,13 @@
         particleData[particleNum] = particle;
       }
 
-      const topLeftX = 0;
-      const topRightX = 220;
-      const bottomLeftX = 9;
-      const bottomRightX = 211;
+      ctxClearIce.textBaseline = 'top';
+      ctxClearIce.textAlign = 'center';
+      ctxClearIce.font = '25px sans-serif';
+      ctxClearIce.fillStyle = 'black';
+      ctxClearIce.fillText('CLEAR ICE SLAB', 480, 95);
 
-      let startTime = Date.now() + 25000;
+      let startTime = Date.now() + 24000;
       // let startTime = Date.now();
       let newTime;
       let lastTime = startTime;
@@ -686,7 +681,6 @@
       let clearLeaders = true;
       const drawWater = () => {
         if (clearLeaders) {
-          ctxLeaders.clearRect(0, 0, 960, 540);
           const style = document.head.getElementsByTagName('style')[0];
           style.innerHTML += `
 #leaders { 
@@ -694,21 +688,6 @@
   z-index: 30;
   animation: null;
 }`;
-          ctxLeaders.beginPath();
-          ctxLeaders.moveTo(90, 310);
-          ctxLeaders.lineTo(480, 270);
-          ctxLeaders.lineWidth = 1;
-          ctxLeaders.stroke();
-          ctxLeaders.arc(480, 270, 3, 0, 2 * Math.PI);
-          ctxLeaders.fill();
-          ctxLeaders.textBaseline = 'top';
-          ctxLeaders.textAlign = 'center';
-          ctxLeaders.font = '25px sans-serif';
-          ctxLeaders.fillText('LIQUID', 80, 350);
-          ctxLeaders.fillText('CENTER', 80, 380);
-
-          ctxLeaders.fillText('CLEAR ICE', 770, 308);
-
           clearLeaders = false;
         }
 
@@ -717,16 +696,44 @@
         lastTime = newTime;
 
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
-        const elapsedFrac = elapsedTimeSec / animationTime;
+        let elapsedFrac = elapsedTimeSec / animationTime;
+        elapsedFrac = elapsedFrac < 0.9 ? elapsedFrac : 0.9;
 
-        ctxLeaders.clearRect(500, 250, 205, 70);
+        ctxLeaders.clearRect(0, 0, 960, 540);
+        ctxLeaders.fillStyle = 'black';
         ctxLeaders.beginPath();
-        ctxLeaders.moveTo(700, 310);
-        ctxLeaders.lineTo(-20 * elapsedFrac / 0.4 + 585, 270);
+        ctxLeaders.moveTo(85, 310);
+        // ctxLeaders.lineTo(480, 270);
+        ctxLeaders.lineTo(480, 240 + 55 * elapsedFrac);
         ctxLeaders.lineWidth = 1;
         ctxLeaders.stroke();
-        ctxLeaders.arc(-20 * elapsedFrac / 0.4 + 585, 270, 3, 0, 2 * Math.PI);
+        ctxLeaders.beginPath();
+        // ctxLeaders.arc(480, 270, 3, 0, 2 * Math.PI);
+        ctxLeaders.arc(480, 240 + 55 * elapsedFrac, 3, 0, 2 * Math.PI);
         ctxLeaders.fill();
+        ctxLeaders.textBaseline = 'top';
+        ctxLeaders.textAlign = 'center';
+        ctxLeaders.font = '25px sans-serif';
+        ctxLeaders.fillText('LIQUID', 60, 350);
+        ctxLeaders.fillText('WATER', 60, 380);
+
+        ctxLeaders.beginPath();
+        ctxLeaders.moveTo(480, 425);
+        ctxLeaders.lineTo(480, 390);
+        ctxLeaders.lineWidth = 1;
+        ctxLeaders.stroke();
+        ctxLeaders.beginPath();
+        ctxLeaders.arc(480, 390, 3, 0, 2 * Math.PI);
+        ctxLeaders.fill();
+        ctxLeaders.fillText('INSULATED', 480, 430);
+        ctxLeaders.fillText('WALLS & FLOOR', 480, 460);
+
+        // if (elapsedFrac > 0.25) {
+        //   if (elapsedFrac < 0.3) {
+        //     ctxLeaders.fillStyle = 'rgba(0, 0, 0, ' + (elapsedFrac - 0.25) / 0.05 + ')';
+        //   } 
+        //   ctxLeaders.fillText('CLEAR ICE SLAB', 480, 87.5 + elapsedFrac * 50);
+        // }
 
         ctxWater.clearRect(0, 0, waterCsec.width, waterCsec.height);
         ctxWaterBub.clearRect(0, 0, waterBubble.width, waterBubble.height);
@@ -741,37 +748,18 @@
         ctxWater.fillStyle = 'rgba(170, 212, 229, 0.5)';
         ctxWater.fill();
 
-        const maxRad = 110;
+        const invSideSlope = bottomLeftX / waterBubble.height; 
         const yOffset = elapsedFrac * waterBubble.height / 2;
-        const xOffset = elapsedFrac * (topRightX + bottomRightX) / 4;
-        const radius = elapsedFrac * maxRad;
-        const invSideSlope = bottomLeftX / waterBubble.height;
         
         ctxWaterBub.beginPath();
-        ctxWaterBub.moveTo(topRightX / 2, yOffset);
-        ctxWaterBub.arcTo(topRightX - (xOffset + yOffset * invSideSlope), yOffset, 215.5 - xOffset, 90, radius);
-        ctxWaterBub.arcTo(220 - (xOffset + (180 - yOffset) * invSideSlope), 180 - yOffset, 110, 180 - yOffset, radius);
-        ctxWaterBub.arcTo(xOffset + (180 - yOffset) * invSideSlope, 180 - yOffset, 4.5 + xOffset, 90, radius);
-        ctxWaterBub.arcTo(xOffset + yOffset * invSideSlope, yOffset, 110, yOffset, radius);
-        ctxWaterBub.lineTo(topRightX / 2, yOffset);
+        ctxWaterBub.moveTo(elapsedFrac * bottomLeftX / 2, yOffset);
+        ctxWaterBub.lineTo(waterBubble.width - elapsedFrac * bottomLeftX / 2, yOffset);
+        ctxWaterBub.lineTo(bottomRightX, waterBubble.height);
+        ctxWaterBub.lineTo(bottomLeftX, waterBubble.height);
+        ctxWaterBub.lineTo(elapsedFrac * bottomLeftX / 2, yOffset);
 
         ctxWaterBub.fillStyle = 'rgba(0,0,255,.1)';
         ctxWaterBub.shadowColor = 'rgba(0,0,255,1)';
-        if (elapsedFrac > 0.35) {
-          ctxWaterBub.fillStyle = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
-              255 * (elapsedFrac - 0.35) / 0.05 + ',255,' +
-              0.1 * (1 + (elapsedFrac - 0.35) / 0.05) + ')';
-          ctxWaterBub.shadowColor = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
-              255 * (elapsedFrac - 0.35) / 0.05 + ',255,1)';
-          ctxLeaders.clearRect(10, 335, 140, 40);
-          ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
-              1 * (0.4 - elapsedFrac) / 0.05 + ')';
-          ctxLeaders.fillText('LIQUID', 80, 350);
-          ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
-              1 * (elapsedFrac - 0.35) / 0.05 + ')';
-          ctxLeaders.fillText('FROZEN', 80, 350);
-          ctxLeaders.fillStyle = 'black';
-        }
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
 
@@ -784,114 +772,33 @@
 
           particleData[particleNum].xLoc += particleData[particleNum].vX * diffTime;
           particleData[particleNum].yLoc += particleData[particleNum].vY * diffTime;
-          particleData[particleNum].vX *= 0.999;
-          particleData[particleNum].vY *= 0.999;
-
-          const x1 = (yOffset + particleData[particleNum].size) * 9 / 180 + xOffset + particleData[particleNum].size;
-          const y1 = yOffset + particleData[particleNum].size;
-          const x2 = x1 + (radius - particleData[particleNum].size) / Math.tan(Math.atan(180 / 9) / 2);
-          const y2 = y1;
-          const x4 = x2;
-          const y4 = yOffset + radius;
-          const x3 = x4 - (radius - particleData[particleNum].size) * Math.cos(Math.atan(9 / 180));
-          const y3 = y4 + (radius - particleData[particleNum].size) * Math.sin(Math.atan(9 / 180));
-
-          const y5 = 180 - y1;
-          const x5 = x1 + (y5 - y1) * 9 / 180;
-          const y8 = 180 - y4;
-          const x8 = x4 + (y8 - y4) * 9 / 180;
-          const y6 = y5;
-          const x6 = x8;
-          const x7 = x8 - (radius - particleData[particleNum].size) * Math.cos(Math.atan(9/180));
-          const y7 = y8 + (radius - particleData[particleNum].size) * Math.sin(Math.atan(9/180));
-
-          const x4prime = 220 - x4;
-          const x8prime = 220 - x8;
-
-          const cornerOffset = (radius - particleData[particleNum].size) * Math.sin(Math.PI / 4);
-          const xB = x2;
-          const yB = y2;
-          const xC = x3;
-          const yC = y3;
-          const xD = x7;
-          const yD = y7;
-          const xF = x6;
-          const yF = y6;
 
           // top boundary
-          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= x4 - radius && particleData[particleNum].xLoc < xB) {
-            if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((xB - particleData[particleNum].xLoc) / (radius - particleData[particleNum].size)))) {
-              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
-          }
-          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= xB && particleData[particleNum].xLoc < 220 - xB) {
-            if (particleData[particleNum].yLoc < yB) {
-              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
-          }
-          if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= 220 - xB && particleData[particleNum].xLoc < 220 - (x4 - radius)) {
-            if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((particleData[particleNum].xLoc - (220 - xB)) / (radius - particleData[particleNum].size)))) {
-              if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
+          if (particleData[particleNum].yLoc <= yOffset + particleData[particleNum].size && particleData[particleNum].vY < 0) {
+            particleData[particleNum].vY = - particleData[particleNum].vY;
           }
           
           // left boundary
-          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yB && particleData[particleNum].yLoc < yC) {
-            if (particleData[particleNum].xLoc < x4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y4 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size)))) {
-              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
-          }
-          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yC && particleData[particleNum].yLoc < yD) {
-            if (particleData[particleNum].xLoc < xC + (particleData[particleNum].yLoc - yC) * 9 / 180) {
-              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
-          }
-          if (particleData[particleNum].xLoc <= xF && particleData[particleNum].yLoc >= yD && particleData[particleNum].yLoc < yF) {
-            if (particleData[particleNum].xLoc < x8 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y8 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size)))) {
-              if (particleData[particleNum].vX < 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
+          if (particleData[particleNum].xLoc <= particleData[particleNum].yLoc * invSideSlope + particleData[particleNum].size && particleData[particleNum].vX < 0) {
+            particleData[particleNum].vX = -particleData[particleNum].vX;
           }
 
           // bottom boundary
-          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= xD && particleData[particleNum].xLoc < xF) {
-            if (particleData[particleNum].yLoc > y8 + (radius - particleData[particleNum].size) * Math.cos(Math.asin(particleData[particleNum].xLoc - x8) / (radius - particleData[particleNum].size))) {
-              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
-          }
-          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= xD && particleData[particleNum].xLoc < 220 - xD) {
-            if (particleData[particleNum].yLoc > yF) {
-              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
-          }
-          if (particleData[particleNum].yLoc >= yD && particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].xLoc < 220 - xD) {
-            if (particleData[particleNum].yLoc > y8 + (radius - particleData[particleNum].size) * Math.cos(Math.asin(particleData[particleNum].xLoc - (220 - x8)) / (radius - particleData[particleNum].size))) {
-              if (particleData[particleNum].vY > 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-            }
+          if (particleData[particleNum].yLoc >= waterBubble.height && particleData[particleNum].vY > 0) {
+            particleData[particleNum].vY = - particleData[particleNum].vY;
           }
 
           // right boundary
-          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yB && particleData[particleNum].yLoc < yC) {
-            if (particleData[particleNum].xLoc > 220 - (x4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y4 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size))))) {
-              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
-          }
-          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yC && particleData[particleNum].yLoc < yD) {
-            if (particleData[particleNum].xLoc > 220 - (xC + (particleData[particleNum].yLoc - yC) * 9 / 180)) {
-              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
-          }
-          if (particleData[particleNum].xLoc >= 220 - xF && particleData[particleNum].yLoc >= yD && particleData[particleNum].yLoc < yF) {
-            if (particleData[particleNum].xLoc > 220 - (x8 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((y8 - particleData[particleNum].yLoc) / (radius - particleData[particleNum].size))))) {
-              if (particleData[particleNum].vX > 0) particleData[particleNum].vX = -particleData[particleNum].vX;
-            }
+          if (particleData[particleNum].xLoc >= waterBubble.width - (particleData[particleNum].yLoc * invSideSlope + particleData[particleNum].size) && particleData[particleNum].vX > 0) {
+            particleData[particleNum].vX = -particleData[particleNum].vX;
           }
         }
-        if (elapsedFrac > 0.4) return;
+        // if (elapsedFrac > 0.9) return;
 
         window.requestAnimationFrame(drawWater);
       }
 
-      setTimeout(drawWater, 25000);
+      setTimeout(drawWater, 24000);
       // drawWater();
     </script>
   </body>
