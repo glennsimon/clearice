@@ -4,6 +4,7 @@
       * {
         font-family: Arial, Helvetica, sans-serif;
         box-sizing: border-box;
+        /* box-sizing: content-box; */
         position: absolute;
         margin: 0px;
       }
@@ -14,7 +15,7 @@
       #container {
         width: 960px;
         height: 540px;
-        /* border: 1px solid black; */
+        /* border: 5px solid blue; */
         overflow: hidden;
       }
       #title-page {
@@ -23,7 +24,7 @@
         font-size: 8em;
         font-weight: bold;
         color: lightblue;
-        animation: title 5s ease-out forwards;
+        animation: title 9s ease-out forwards;
       }
       #title-page>div {
         top: 100px;
@@ -40,16 +41,19 @@
       }
       #t1 {
         top: 50%;
+        opacity: 0;
         transform: translate(150px, -50%);
-        animation: therm-fade 15s ease-in forwards;
+        animation: therm-fade 29s ease-in forwards;
       }
       #t2 {
         top: 50%;
+        opacity: 0;
         transform: translate(710px, -50%);
-        animation: therm-fade 15s ease-in forwards;
+        animation: therm-fade 29s ease-in forwards;
       }
       .heat-ripple {
-        animation: ripple-fade 15s ease-in forwards;
+        opacity: 0;
+        animation: ripple-fade 29s ease-in forwards;
       }
       #r1 {
         top: 50%;
@@ -61,49 +65,48 @@
         top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 1;
-        animation: heat-flow 16s ease-in forwards;
+        opacity: 0;
+        animation: heat-flow 29s ease-in forwards;
       }
       #equilibrium {
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 3em;
         top: 60%;
         left: 50%;
+        text-align: center;
         transform: translate(-50%, -50%);
         opacity: 0;
-        animation: equilibrium 16s ease-in forwards;
+        animation: equilibrium 29s ease-in forwards;
+      }
+      .labels-l1 {
+        top: 60%;
+        transform: translate(-50%, -50%);
       }
       @keyframes title {
         from { opacity: 1; }
-        80% { opacity: 1; }
+        89% { opacity: 1; }
         to { opacity: 0; }
       }
       @keyframes ripple-fade {
-        from { opacity: 0; }
-        33% { opacity: 0; }
-        37% { opacity: 1; }
+        28% { opacity: 0; }
+        31% { opacity: 1; }
+        86% { opacity: 0; }
         to { opacity: 0; }
       }
       @keyframes therm-fade {
-        from { opacity: 0; }
-        31% { opacity: 0; }
-        37% { opacity: 1; }
+        28% { opacity: 0; }
+        31% { opacity: 1; }
         to { opacity: 1; }
       }
       @keyframes heat-flow {
-        from { opacity: 0; }
-        31% { opacity: 0; }
-        35% { opacity: 1; }
-        93% { opacity: 0; }
+        28% { opacity: 0; }
+        31% { opacity: 1; }
+        86% { opacity: 0; }
         to { opacity: 0; }
       }
       @keyframes equilibrium {
-        93% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
+        83% { opacity: 0; }
+        90% { opacity: 1; }
+        to { opacity: 1; }
       }
     </style>
   </head>
@@ -117,7 +120,9 @@
         <canvas class='thermometer' id='t1'></canvas>
         <canvas class='heat-ripple' id='r1'></canvas>
         <div id='heat-flow'>HEAT FLOW →</div>
-        <div id='equilibrium'>← EQUILIBRIUM →</div>
+        <div id='equilibrium'>
+            ← THERMAL →<br>EQUILIBRIUM
+        </div>
         <canvas class='thermometer' id='t2'></canvas>
       </div>
     </div>
@@ -138,12 +143,12 @@
 //                 tempFinish: <num degF>,
 //                 tempRampTime = <num sec>}, {...}, ...]
         thermometer('t1', 'hot', 100, 400, false,
-            [{initialDwell: 0, tempStart: 60, tempFinish: 0, tempRampTime: 10}]);
+            [{initialDwell: 0, tempStart: 60, tempFinish: 0, tempRampTime: 17}]);
         thermometer('t2', 'cold', 100, 400, false,
             [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
       }
 
-      setTimeout(showHeatFlow, 5000);
+      setTimeout(showHeatFlow, 8000);
     </script>
   </body>
 </html>

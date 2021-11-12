@@ -20,7 +20,7 @@
         background-image: url('images/icebox.png');
         background-size: contain;
         background-repeat: no-repeat;
-        animation: zoom-in-freezer 3s 22s forwards;
+        animation: zoom-in-freezer 3s 12s forwards;
         z-index: -1;
       }
       #extras {
@@ -29,7 +29,7 @@
       }
       #leaders {
         opacity: 0;
-        animation: disappear 19s 3s ease-in forwards;
+        animation: disappear 9s 3s ease-in forwards;
         z-index: 0;
       }
       #t1 {
@@ -39,14 +39,14 @@
         opacity: 0;
         transform: scale(75%);
         /* animation: disappear 19s 3s ease-in forwards; */
-        animation: appear 3s 3s forwards, reposition-t1 3s 22s forwards;
+        animation: appear 3s 3s forwards, reposition-t1 3s 12s forwards;
         z-index: 10;
       }
       #t2 {
         top: 25%;
         left: 70%;
         /* transform: translate(680px, -150%); */
-        animation: reposition-t2 3s 22s forwards;
+        animation: reposition-t2 3s 12s forwards;
         z-index: 10;
       }
       /* .heat-ripple {
@@ -58,49 +58,49 @@
         left: 47%;
         transform: translate(-50%, -50%) rotate(-95deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r1 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r1 3s 12s ease-in-out forwards;
       }
       #r2 {
         top: 55%;
         left: 53%;
         transform: translate(-50%, -50%) rotate(-85deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r2 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r2 3s 12s ease-in-out forwards;
       }
       #r3 {
         top: 65%;
         left: 60%;
         transform: translate(-50%, -50%) rotate(-5deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r3 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r3 3s 12s ease-in-out forwards;
       }
       #r4 {
         top: 80%;
         left: 59%;
         transform: translate(-50%, -50%) rotate(30deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r4 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r4 3s 12s ease-in-out forwards;
       }
       #r5 {
         top: 87%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(90deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r5 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r5 3s 12s ease-in-out forwards;
       }
       #r6 {
         top: 80%;
         left: 41%;
         transform: translate(-50%, -50%) rotate(150deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r6 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r6 3s 12s ease-in-out forwards;
       }
       #r7 {
         top: 65%;
         left: 40%;
         transform: translate(-50%, -50%) rotate(185deg);
         opacity: 0;
-        animation: disappear 42s 2s ease-in forwards, reposition-r7 3s 22s ease-in-out forwards;
+        animation: disappear 33s 2s ease-in forwards, reposition-r7 3s 12s ease-in-out forwards;
       }
       #heat-flow {
         font-family: Arial, Helvetica, sans-serif;
@@ -120,7 +120,7 @@
         /* visibility: hidden; */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 3s 22s forwards;
+        animation: zoom-in 3s 12s forwards;
       }
       #cup-near {
         position: absolute;
@@ -131,7 +131,7 @@
         /* visibility: hidden; */
         transform: rotateX(-5deg) translateY(10px);
         transform-style: preserve-3d;
-        animation: zoom-in 3s 22s forwards;
+        animation: zoom-in 3s 12s forwards;
       }
       #cup-far-bottom {
         top: 220px;
@@ -153,7 +153,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 0, 90px 0, 90px 45px, 0 45px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: appear 3s 3s forwards;
       }
       #cup-near-bottom {
         top: 220px;
@@ -164,7 +164,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -200px);
         clip-path: polygon(0 50px, 100px 50px, 100px 100px, 0 100px, 0 50px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-near-bottom-upr {
         top: 225px;
@@ -175,7 +175,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-far-lip {
         top: 215px;
@@ -197,7 +197,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -100.1px);
         clip-path: polygon(0 110px, 110px 110px, 110px 55px, 104.5px 55px, 104.5px 104.5px, 5.5px 104.5px, 5.5px 55px, 0 55px, 0 110px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-front {
         top: 370px;
@@ -209,7 +209,7 @@
         transform: translateZ(-150px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 110px 0, 105px 100px, 5px 100px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-front-inner {
         top: 370px;
@@ -221,7 +221,7 @@
         transform: translateZ(-155px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 99px 0, 94.5px 90px, 4.5px 90px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-back {
         top: 370px;
@@ -281,7 +281,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-50px) rotateX(2.866deg);
         clip-path: polygon(0 0, 55px 0, 55px 100px, 5px 100px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-near-left-inner {
         top: 370px;
@@ -293,7 +293,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(0 0, 49.5px 0, 49.5px 90px, 4.5px 90px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-far-right {
         top: 370px;
@@ -329,7 +329,7 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(50px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 55px 0, 55px 100px, 5px 100px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #cup-near-right-inner {
         top: 370px;
@@ -341,7 +341,7 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(45px) rotateX(-2.866deg);
         clip-path: polygon(0 0, 49.5px 0, 49.5px 90px, 4.5px 90px, 0 0);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-far-bottom {
         top: 225px;
@@ -363,7 +363,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -190px);
         clip-path: polygon(0 45px, 90px 45px, 90px 90px, 0 90px, 0 45px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-front {
         top: 370px;
@@ -375,7 +375,7 @@
         transform: translateZ(-155px) rotateX(-2.866deg);
         clip-path: polygon(0.5px 10px, 98.5px 10px, 94.5px 90px, 4.5px 90px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-back {
         top: 370px;
@@ -411,7 +411,7 @@
         transform: rotateY(90deg) translateX(200px) translateZ(-45px) rotateX(2.866deg);
         clip-path: polygon(0.5px 10px, 49.5px 10px, 49.5px 90px, 4.5px 90px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-far-right {
         top: 370px;
@@ -435,7 +435,7 @@
         transform:rotateY(90deg)  translateX(200px) translateZ(44.9px) rotateX(-2.866deg);
         clip-path: polygon(0.5px 10px, 49.5px 10px, 49.5px 90px, 4.5px 90px, 0.5px 10px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-far-top {
         top: 221px;
@@ -457,7 +457,7 @@
         transform: rotateX(90deg) translate3D(0, -200px, -110px);
         clip-path: polygon(0 49px, 98px 49px, 98px 98px, 0 98px, 0 49px);
         opacity: 0;
-        animation: disappear 23s 3s forwards;
+        animation: disappear 12.5s 3s forwards;
       }
       #water-csec {
         top: 180.5px;
@@ -607,8 +607,8 @@
 //                 tempFinish: <num degF>,
 //                 tempRampTime = <num sec>}, {...}, ...]
       thermometer('t1', 'hot', 50, 200, true,
-          [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 25},
-          {initialDwell: 15, tempStart: 32, tempFinish: 0, tempRampTime: 15}]);
+          [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 15},
+          {initialDwell: 15, tempStart: 32, tempFinish: 0, tempRampTime: 5}]);
       thermometer('t2', 'cold', 25, 100, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
 
@@ -653,7 +653,7 @@
       const bottomLeftX = 9;
       const bottomRightX = 211;
 
-      let startTime = Date.now() + 25000;
+      let startTime = Date.now() + 14000;
       // let startTime = Date.now();
       let newTime;
       let lastTime = startTime;
@@ -866,7 +866,7 @@
         window.requestAnimationFrame(drawWater);
       }
 
-      setTimeout(drawWater, 25000);
+      setTimeout(drawWater, 15000);
       // drawWater();
     </script>
   </body>

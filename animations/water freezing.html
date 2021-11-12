@@ -14,17 +14,12 @@
         /* overflow: visible; */
         overflow: hidden;
         perspective: 900px;
-        border: 1px solid black;
+        /* border: 1px solid black; */
       }
       #extras {
         width: 960px;
         height: 540px;
       }
-      /* #leaders {
-        opacity: 1;
-        animation: disappear 19s 3s ease-in forwards;
-        z-index: 0;
-      } */
       #leaders { 
         opacity: 1;
         z-index: 30;
@@ -34,28 +29,19 @@
         opacity: 1;
         z-index: 30;
         animation: null;
-        animation: clear-ice-text 14s linear forwards;
+        animation: clear-ice-text 21s linear forwards;
       }
       #t1 {
         top: 30%;
         left: 13%;
-        /* transform: translate(300px, 80%); */
         opacity: 1;
-        /* animation: disappear 19s 3s ease-in forwards; */
-        animation: appear 3s 3s forwards, reposition-t1 3s 22s forwards;
         z-index: 10;
       }
       #t2 {
         top: 5%;
         left: 80%;
-        /* transform: translate(680px, -150%); */
-        animation: reposition-t2 3s 22s forwards;
         z-index: 10;
       }
-      /* .heat-ripple {
-        opacity: 0;
-        animation: disappear 45s 3s ease-in forwards;
-      } */
       #r1 {
         top: 27%;
         left: 10%;
@@ -81,21 +67,6 @@
         left: 90%;
         transform: translate(-50%, -50%) rotate(-90deg);
       }
-      /* #r6 {
-        top: 15%;
-        left: 55%;
-        transform: translate(-50%, -50%) rotate(-90deg);
-      }
-      #r7 {
-        top: 15%;
-        left: 65%;
-        transform: translate(-50%, -50%) rotate(-90deg);
-      }
-      #water-csec {
-        top: 240px;
-        opacity: 1;
-        z-index: 10;
-      } */
       #ice-csec {
         top: 240px;
         left: 0px;
@@ -127,27 +98,18 @@
         <canvas class='heat-ripple' id='r3'></canvas>
         <canvas class='heat-ripple' id='r4'></canvas>
         <canvas class='heat-ripple' id='r5'></canvas>
-        <!-- <canvas class='heat-ripple' id='r6'></canvas>
-        <canvas class='heat-ripple' id='r7'></canvas> -->
       </div>
-      <!-- <canvas id='water-csec'></canvas> -->
       <div id='ice-csec'></div>
       <canvas id='water-bubble'></canvas>
     </div>
     <script src='js/thermometer.js'></script>
     <script src='js/heat-ripple.js'></script>
     <script>
-      // const heatRipple = (  rippleId = 'r1',
-      //   rippleWidth = 200, rippleHeight = 20,
-      //   lineThickness = 3, ripplePeriod = 40, rippleSpeed = 50,
-      //   startColor = 'red', endColor = 'yellow') => {
       heatRipple('r1', 150, 15, 3, 30, 50, 'orange', 'lightblue');
       heatRipple('r2', 150, 15, 3, 30, 50, 'orange', 'lightblue');
       heatRipple('r3', 150, 15, 3, 30, 50, 'orange', 'lightblue');
       heatRipple('r4', 150, 15, 3, 30, 50, 'orange', 'lightblue');
       heatRipple('r5', 150, 15, 3, 30, 50, 'orange', 'lightblue');
-      // heatRipple('r6', 150, 15, 3, 30, 50, 'orange', 'lightblue');
-      // heatRipple('r7', 150, 15, 3, 30, 50, 'orange', 'lightblue');
 
       const leaders = document.getElementById('leaders');
       leaders.width = 960;
@@ -157,33 +119,13 @@
       clearIceText.width = 960;
       clearIceText.height = 540;
       const ctxIceText = clearIceText.getContext('2d');
-      // ctxLeaders.beginPath();
-      // ctxLeaders.moveTo(315, 385);
-      // ctxLeaders.lineTo(480, 395);
-      // ctxLeaders.strokeStyle = 'black';
-      // ctxLeaders.lineWidth = 1;
-      // ctxLeaders.stroke();
-      // ctxLeaders.arc(480, 395, 3, 0, 2 * Math.PI);
-      // ctxLeaders.fillStyle = 'black';
-      // ctxLeaders.fill();
 
-// const thermometer = (id = 't0', start = 'cold', thermometerWidth = 50,
-//    thermometerHeight = 200, labels = false, timingArray) => {
-// start = 'cold'|'hot'
-// timingArray = [{initialDwell: <num sec>,
-//                 tempStart: <num degF>,
-//                 tempFinish: <num degF>,
-//                 tempRampTime = <num sec>}, {...}, ...]
       thermometer('t1', 'cold', 75, 300, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 32, tempRampTime: 0},
           {initialDwell: 10000, tempStart: 32, tempFinish: 60, tempRampTime: 0}]);
       thermometer('t2', 'cold', 40, 160, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
 
-      // const waterCsec = document.getElementById('water-csec');
-      // waterCsec.width = 220;
-      // waterCsec.height = 180;
-      // const ctxWater = waterCsec.getContext('2d');
       const iceCsec = document.getElementById('ice-csec');
       const waterBubble = document.getElementById('water-bubble');
       waterBubble.width = 960;
@@ -191,7 +133,7 @@
       const ctxWaterBub = waterBubble.getContext('2d');
 
       let particleSpeed = 5;
-      const animationTime = 35;
+      const animationTime = 60;
       const particleData = [];
       const numParticles = 50;
       const particleDia = 5;
@@ -253,19 +195,8 @@
         const elapsedTimeSec = (Date.now() - startTime) / 1000;
         const elapsedFrac = elapsedTimeSec / animationTime;
 
-        // ctxWater.clearRect(0, 0, waterCsec.width, waterCsec.height);
         ctxWaterBub.clearRect(0, 0, 960, 340);
         
-        // ctxWater.beginPath();
-        // ctxWater.moveTo(topLeftX, 0);
-        // ctxWater.lineTo(topRightX, 0);
-        // ctxWater.lineTo(bottomRightX, waterCsec.height);
-        // ctxWater.lineTo(bottomLeftX, waterCsec.height);
-        // ctxWater.lineTo(0, 0);
-
-        // ctxWater.fillStyle = 'rgba(170, 212, 229, 0.5)';
-        // ctxWater.fill();
-
         const yOffset = elapsedFrac * 240; //340 / 2;
         
         ctxWaterBub.beginPath();
@@ -280,7 +211,6 @@
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
 
-        // const iceThickness = (300 - 240) + yOffset;
         const textTop = 260 + yOffset / 2;
         const iceTop = 240;
         const iceBottom = 300 + yOffset;
@@ -299,8 +229,6 @@
         ctxLeaders.lineTo(470, iceBottom - 10);
         ctxLeaders.lineWidth = 1;
         ctxLeaders.stroke();
-        // ctxLeaders.beginPath();
-        // ctxLeaders.fillText('CLEAR ICE', 480, textTop);
 
         for (let particleNum = 0; particleNum < numParticles; particleNum++) {
           ctxWaterBub.beginPath();
@@ -311,37 +239,18 @@
 
           particleData[particleNum].xLoc += particleData[particleNum].vX * diffTime;
           particleData[particleNum].yLoc += particleData[particleNum].vY * diffTime;
-          // particleData[particleNum].vX *= 0.999;
-          // particleData[particleNum].vY *= 0.999;
 
-          // top boundary
           if (particleData[particleNum].yLoc - particleData[particleNum].size <= yOffset) {
             if (particleData[particleNum].vY < 0) {
               particleData[particleNum].vY = -particleData[particleNum].vY;
             }
           }
-          // if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= x4 - radius && particleData[particleNum].xLoc < xB) {
-          //   if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((xB - particleData[particleNum].xLoc) / (radius - particleData[particleNum].size)))) {
-          //     if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-          //   }
-          // }
-          // if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= xB && particleData[particleNum].xLoc < 220 - xB) {
-          //   if (particleData[particleNum].yLoc < yB) {
-          //     if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-          //   }
-          // }
-          // if (particleData[particleNum].yLoc <= y4 && particleData[particleNum].xLoc >= 220 - xB && particleData[particleNum].xLoc < 220 - (x4 - radius)) {
-          //   if (particleData[particleNum].yLoc < y4 - (radius - particleData[particleNum].size) * Math.cos(Math.asin((particleData[particleNum].xLoc - (220 - xB)) / (radius - particleData[particleNum].size)))) {
-          //     if (particleData[particleNum].vY < 0) particleData[particleNum].vY = -particleData[particleNum].vY;
-          //   }
-          // }
         }
         if (elapsedFrac > 0.4) return;
 
         window.requestAnimationFrame(drawWater);
       }
 
-      // setTimeout(drawWater, 25000);
       drawWater();
     </script>
   </body>
