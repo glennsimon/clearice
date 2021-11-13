@@ -29,7 +29,13 @@
         opacity: 1;
         z-index: 30;
         animation: null;
-        animation: clear-ice-text 21s linear forwards;
+        animation: clear-ice-text 24s linear forwards;
+      }
+      #water-text {
+        opacity: 1;
+        z-index: 30;
+        animation: null;
+        animation: water-text 24s linear forwards;
       }
       #t1 {
         top: 30%;
@@ -75,13 +81,18 @@
         background-color: rgba(170, 212, 229, 0.5);
       }
       #water-bubble {
-        top: 300px;
+        top: 280px;
         opacity: 1;
         z-index: 20;
       }
       @keyframes clear-ice-text {
         to { 
-          transform: translateY(48px);
+          transform: translateY(55px);
+        }
+      }
+      @keyframes water-text {
+        to { 
+          transform: translateY(80px);
         }
       }
     </style>
@@ -91,6 +102,7 @@
       <div id='extras'>
         <canvas id='leaders'></canvas>
         <canvas id='clear-ice-text'></canvas>
+        <canvas id='water-text'></canvas>
         <canvas class='thermometer' id='t1'></canvas>
         <canvas class='thermometer' id='t2'></canvas>
         <canvas class='heat-ripple' id='r1'></canvas>
@@ -119,6 +131,10 @@
       clearIceText.width = 960;
       clearIceText.height = 540;
       const ctxIceText = clearIceText.getContext('2d');
+      const waterText = document.getElementById('water-text');
+      waterText.width = 960;
+      waterText.height = 540;
+      const ctxWaterText = waterText.getContext('2d');
 
       thermometer('t1', 'cold', 75, 300, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 32, tempRampTime: 0},
@@ -177,15 +193,19 @@
       ctxLeaders.textAlign = 'center';
       ctxLeaders.font = '25px sans-serif';
       ctxLeaders.fillText('FREEZER', 480, 30);
-      // ctxLeaders.fillText('CLEAR ICE', 480, 260);
-      ctxLeaders.fillText('LIQUID', 480, 450);
-      ctxLeaders.fillText('WATER', 480, 480);
 
       ctxIceText.beginPath();
       ctxIceText.textBaseline = 'top';
       ctxIceText.textAlign = 'center';
       ctxIceText.font = '25px sans-serif';
-      ctxIceText.fillText('CLEAR ICE', 480, 260);
+      ctxIceText.fillText('CLEAR ICE', 480, 250);
+
+      ctxWaterText.beginPath();
+      ctxWaterText.textBaseline = 'top';
+      ctxWaterText.textAlign = 'center';
+      ctxWaterText.font = '25px sans-serif';
+      ctxWaterText.fillText('LIQUID', 480, 360);
+      ctxWaterText.fillText('WATER', 480, 390);
 
       const drawWater = () => {
         newTime = Date.now();
@@ -197,7 +217,7 @@
 
         ctxWaterBub.clearRect(0, 0, 960, 340);
         
-        const yOffset = elapsedFrac * 240; //340 / 2;
+        const yOffset = elapsedFrac < 0.4 ? elapsedFrac * 280 : 0.4 * 280;
         
         ctxWaterBub.beginPath();
         ctxWaterBub.moveTo(0, yOffset);
@@ -211,9 +231,11 @@
         ctxWaterBub.shadowBlur = 5;
         ctxWaterBub.fill();
 
-        const textTop = 260 + yOffset / 2;
-        const iceTop = 240;
-        const iceBottom = 300 + yOffset;
+        const textTop = 250 + yOffset / 2;
+        const iceTop = 241;
+        const iceBottom = 280 + yOffset;
+        let alpha = elapsedFrac < 0.1 ? 0 : (elapsedFrac - 0.1) / 0.05;
+        ctxLeaders.strokeStyle = 'rgba(0,0,0,' + alpha + ')';
         ctxLeaders.clearRect(330, 240, 300, 200);
         ctxLeaders.beginPath();
         ctxLeaders.moveTo(480, textTop - 5);
@@ -240,13 +262,33 @@
           particleData[particleNum].xLoc += particleData[particleNum].vX * diffTime;
           particleData[particleNum].yLoc += particleData[particleNum].vY * diffTime;
 
-          if (particleData[particleNum].yLoc - particleData[particleNum].size <= yOffset) {
+          // top bounce
+          if (particleData[particleNum].yLoc - particleData[particleNum].size <= yOffset + 3) {
             if (particleData[particleNum].vY < 0) {
               particleData[particleNum].vY = -particleData[particleNum].vY;
             }
           }
+          // bottom bounce
+          if (particleData[particleNum].yLoc - particleData[particleNum].size > iceCsec.offsetHeight) {
+            if (particleData[particleNum].vY > 0) {
+              particleData[particleNum].vY = -particleData[particleNum].vY;
+            }
+          }
+          // left bounce
+          if (particleData[particleNum].xLoc - particleData[particleNum].size < 0) {
+            if (particleData[particleNum].vX < 0) {
+              particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
+          }
+          // right bounce
+          if (particleData[particleNum].xLoc + particleData[particleNum].size > 960) {
+            if (particleData[particleNum].vX > 0) {
+              particleData[particleNum].vX = -particleData[particleNum].vX;
+            }
+          }
+
         }
-        if (elapsedFrac > 0.4) return;
+        // if (elapsedFrac > 0.4) return;
 
         window.requestAnimationFrame(drawWater);
       }
