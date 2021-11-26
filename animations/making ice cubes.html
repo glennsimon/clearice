@@ -58,49 +58,49 @@
         left: 47%;
         transform: translate(-50%, -50%) rotate(-95deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r1 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r1 3s 12s ease-in-out forwards;
       }
       #r2 {
         top: 55%;
         left: 53%;
         transform: translate(-50%, -50%) rotate(-85deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r2 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r2 3s 12s ease-in-out forwards;
       }
       #r3 {
         top: 65%;
         left: 60%;
         transform: translate(-50%, -50%) rotate(-5deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r3 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r3 3s 12s ease-in-out forwards;
       }
       #r4 {
         top: 80%;
         left: 59%;
         transform: translate(-50%, -50%) rotate(30deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r4 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r4 3s 12s ease-in-out forwards;
       }
       #r5 {
         top: 87%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(90deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r5 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r5 3s 12s ease-in-out forwards;
       }
       #r6 {
         top: 80%;
         left: 41%;
         transform: translate(-50%, -50%) rotate(150deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r6 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r6 3s 12s ease-in-out forwards;
       }
       #r7 {
         top: 65%;
         left: 40%;
         transform: translate(-50%, -50%) rotate(185deg);
         opacity: 0;
-        animation: disappear 33s 2s ease-in forwards, reposition-r7 3s 12s ease-in-out forwards;
+        animation: disappear 44s 2s ease-in forwards, reposition-r7 3s 12s ease-in-out forwards;
       }
       #heat-flow {
         font-family: Arial, Helvetica, sans-serif;
@@ -471,11 +471,6 @@
         opacity: 1;
         z-index: 20;
       }
-      @keyframes ripple-fade {
-        to {
-          opacity: 0;
-        }
-      }
       @keyframes heat-flow {
         80% {
           opacity: 0;
@@ -510,13 +505,13 @@
       @keyframes reposition-t2 {
         to { top: 10%; left: 85%; }
       }
-      @keyframes reposition-r1 { to { top: 20%; left: 43%; } }
-      @keyframes reposition-r2 { to { top: 20%; left: 57%; } }
-      @keyframes reposition-r3 { to { top: 40%; left: 68%; } }
-      @keyframes reposition-r4 { to { top: 68%; left: 67%; } }
-      @keyframes reposition-r5 { to { top: 79%; } }
-      @keyframes reposition-r6 { to { top: 68%; left: 33%; } }
-      @keyframes reposition-r7 { to { top: 40%; left: 32%; } }
+      @keyframes reposition-r1 { to { transform: translate(-50%, -50%) rotate(-95deg) scale(150%); top: 20%; left: 43%; } }
+      @keyframes reposition-r2 { to { transform: translate(-50%, -50%) rotate(-85deg) scale(150%); top: 20%; left: 57%; } }
+      @keyframes reposition-r3 { to { transform: translate(-50%, -50%) rotate(-5deg) scale(150%); top: 40%; left: 68%; } }
+      @keyframes reposition-r4 { to { transform: translate(-50%, -50%) rotate(30deg) scale(150%); top: 68%; left: 67%; } }
+      @keyframes reposition-r5 { to { transform: translate(-50%, -50%) rotate(90deg) scale(150%); top: 79%; } }
+      @keyframes reposition-r6 { to { transform: translate(-50%, -50%) rotate(150deg) scale(150%); top: 68%; left: 33%; } }
+      @keyframes reposition-r7 { to { transform: translate(-50%, -50%) rotate(185deg) scale(150%); top: 40%; left: 32%; } }
     </style>
   </head>
   <body>
@@ -608,7 +603,7 @@
 //                 tempRampTime = <num sec>}, {...}, ...]
       thermometer('t1', 'hot', 50, 200, true,
           [{initialDwell: 0, tempStart: 60, tempFinish: 32, tempRampTime: 15},
-          {initialDwell: 15, tempStart: 32, tempFinish: 0, tempRampTime: 5}]);
+          {initialDwell: 21, tempStart: 32, tempFinish: 0, tempRampTime: 10}]);
       thermometer('t2', 'cold', 25, 100, true,
           [{initialDwell: 0, tempStart: 0, tempFinish: 0, tempRampTime: 0}]);
 
@@ -622,7 +617,7 @@
       const ctxWaterBub = waterBubble.getContext('2d');
 
       let particleSpeed = 5;
-      const animationTime = 35;
+      const animationTime = 47;
       const particleData = [];
       const numParticles = 50;
       const particleDia = 5;
@@ -716,7 +711,7 @@
         ctxWater.fillStyle = 'rgba(170, 212, 229, 0.5)';
         ctxWater.fill();
 
-        const maxRad = 110;
+        const maxRad = 90;
         const yOffset = elapsedFrac * waterBubble.height / 2;
         const xOffset = elapsedFrac * (topRightX + bottomRightX) / 4;
         const radius = elapsedFrac * maxRad;
@@ -732,23 +727,38 @@
 
         ctxWaterBub.fillStyle = 'rgba(0,0,255,.1)';
         ctxWaterBub.shadowColor = 'rgba(0,0,255,1)';
-        if (elapsedFrac > 0.35) {
-          ctxWaterBub.fillStyle = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
-              255 * (elapsedFrac - 0.35) / 0.05 + ',255,' +
-              0.1 * (1 + (elapsedFrac - 0.35) / 0.05) + ')';
-          ctxWaterBub.shadowColor = 'rgba(' + 255 * (elapsedFrac - 0.35) / 0.05 + ',' +
-              255 * (elapsedFrac - 0.35) / 0.05 + ',255,1)';
+        ctxWaterBub.shadowBlur = 5;
+        if (elapsedFrac > 0.28) {
+          let opacityFrac = 0.002;
+          let opacity = opacityFrac * (1 + (elapsedFrac - 0.28) / 0.17);
+          ctxWaterBub.shadowColor = 'rgba(' + 255 * (elapsedFrac - 0.28) / 0.17 + ',' +
+              255 * (elapsedFrac - 0.28) / 0.17 + ',255,1)';
+          for (let i = 1; i < 10; i++) {
+            ctxWaterBub.lineWidth = 20 - 2 * i;
+            ctxWaterBub.strokeStyle = 'rgba(255,255,255,' + opacity + ')';
+            // ctxWaterBub.strokeStyle = 'rgba(255,255,255,0)';
+            ctxWaterBub.stroke();
+            opacityFrac += 0.002;
+            opacity = opacityFrac * (1 + (elapsedFrac - 0.28) / 0.17);
+          }
+          ctxWaterBub.fillStyle = 'rgba(' + 255 * (elapsedFrac - 0.28) / 0.17 + ',' +
+              255 * (elapsedFrac - 0.28) / 0.17 + ',255,' +
+              0.1 * (1 + (elapsedFrac - 0.28) / 0.17) + ')';
           ctxLeaders.clearRect(100, 335, 140, 40);
           ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
-              1 * (0.4 - elapsedFrac) / 0.05 + ')';
+              1 * (0.4 - elapsedFrac) / 0.17 + ')';
           ctxLeaders.fillText('LIQUID', 170, 350);
           ctxLeaders.fillStyle = 'rgba(0,0,0,' + 
-              1 * (elapsedFrac - 0.35) / 0.05 + ')';
+              1 * (elapsedFrac - 0.28) / 0.17 + ')';
           ctxLeaders.fillText('FROZEN', 170, 350);
           ctxLeaders.fillStyle = 'black';
         }
-        ctxWaterBub.shadowBlur = 5;
+
+        // ctxWaterBub.globalCompositeOperation = 'source-out';
+
         ctxWaterBub.fill();
+
+        // ctxWaterBub.globalCompositeOperation = 'source-out';
 
         for (let particleNum = 0; particleNum < numParticles; particleNum++) {
           ctxWaterBub.beginPath();
@@ -861,7 +871,7 @@
             }
           }
         }
-        if (elapsedFrac > 0.4) return;
+        if (elapsedFrac > 0.45) return;
 
         window.requestAnimationFrame(drawWater);
       }
