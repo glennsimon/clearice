@@ -23,14 +23,16 @@
         text-align: center;
         font-size: 8em;
         font-weight: bold;
-        color: rgba(173,216,230,.8);
-        animation: title 9s ease-out forwards;
+        opacity: 1;
+        color: rgba(173,216,230,0);
+        animation: title 8.5s ease-out forwards;
       }
       #title-page>div {
         top: 100px;
         width: 960px;
         height: 540px;
         margin: auto;
+        animation: title-transparency 8.5s forwards;
       }
       #freezer {
         width: 960px;
@@ -43,17 +45,17 @@
         top: 50%;
         opacity: 0;
         transform: translate(150px, -50%);
-        animation: therm-fade 29s ease-in forwards;
+        animation: therm-fade 28.5s ease-in forwards;
       }
       #t2 {
         top: 50%;
         opacity: 0;
         transform: translate(710px, -50%);
-        animation: therm-fade 29s ease-in forwards;
+        animation: therm-fade 28.5s ease-in forwards;
       }
       .heat-ripple {
         opacity: 0;
-        animation: ripple-fade 29s ease-in forwards;
+        animation: ripple-fade 28.5s ease-in forwards;
       }
       #r1 {
         top: 50%;
@@ -66,7 +68,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         opacity: 0;
-        animation: heat-flow 29s ease-in forwards;
+        animation: heat-flow 28.5s ease-in forwards;
       }
       #equilibrium {
         font-size: 3em;
@@ -75,14 +77,13 @@
         text-align: center;
         transform: translate(-50%, -50%);
         opacity: 0;
-        animation: equilibrium 29s ease-in forwards;
+        animation: equilibrium 28.5s ease-in forwards;
       }
       .labels-l1 {
         top: 60%;
         transform: translate(-50%, -50%);
       }
       @keyframes title {
-        from { opacity: 1; }
         89% { opacity: 1; }
         to { opacity: 0; }
       }
@@ -107,6 +108,9 @@
         83% { opacity: 0; }
         90% { opacity: 1; }
         to { opacity: 1; }
+      }
+      @keyframes title-transparency {
+        to { color: rgba(173,216,230,1); }
       }
     </style>
   </head>
